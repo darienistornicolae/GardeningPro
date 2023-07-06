@@ -15,6 +15,8 @@
 		014949292A576E510063FCF8 /* ReceiptParser in Frameworks */ = {isa = PBXBuildFile; productRef = 014949282A576E510063FCF8 /* ReceiptParser */; };
 		0149492B2A576E510063FCF8 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 0149492A2A576E510063FCF8 /* RevenueCat */; };
 		0149492E2A576F520063FCF8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0149492D2A576F520063FCF8 /* StoreKit.framework */; };
+		014949312A576FA00063FCF8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 014949302A576FA00063FCF8 /* GoogleMobileAds */; };
+		014949352A5771C90063FCF8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014949342A5771C90063FCF8 /* LoginViewModel.swift */; };
 		01C68D282A576A2C004F64A0 /* GardeningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D272A576A2C004F64A0 /* GardeningApp.swift */; };
 		01C68D2C2A576A2C004F64A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2B2A576A2C004F64A0 /* Assets.xcassets */; };
 		01C68D2F2A576A2C004F64A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2E2A576A2C004F64A0 /* Preview Assets.xcassets */; };
@@ -25,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		0149492D2A576F520063FCF8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		014949342A5771C90063FCF8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		01C68D242A576A2C004F64A0 /* Gardening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gardening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C68D272A576A2C004F64A0 /* GardeningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardeningApp.swift; sourceTree = "<group>"; };
 		01C68D2B2A576A2C004F64A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 				014949292A576E510063FCF8 /* ReceiptParser in Frameworks */,
 				014949262A576E2D0063FCF8 /* FirebaseFirestoreSwift in Frameworks */,
 				0149492B2A576E510063FCF8 /* RevenueCat in Frameworks */,
+				014949312A576FA00063FCF8 /* GoogleMobileAds in Frameworks */,
 				0149492E2A576F520063FCF8 /* StoreKit.framework in Frameworks */,
 				014949202A576E2D0063FCF8 /* FirebaseAnalyticsSwift in Frameworks */,
 				014949242A576E2D0063FCF8 /* FirebaseFirestore in Frameworks */,
@@ -59,6 +63,24 @@
 				0149492D2A576F520063FCF8 /* StoreKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		014949322A57719A0063FCF8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				01C68D372A576A62004F64A0 /* SignUpView.swift */,
+				01C68D392A576A71004F64A0 /* HomeScreenView.swift */,
+				01C68D352A576A53004F64A0 /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		014949332A5771BC0063FCF8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				014949342A5771C90063FCF8 /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		01C68D1B2A576A2B004F64A0 = {
@@ -81,11 +103,10 @@
 		01C68D262A576A2C004F64A0 /* Gardening */ = {
 			isa = PBXGroup;
 			children = (
-				01C68D272A576A2C004F64A0 /* GardeningApp.swift */,
-				01C68D372A576A62004F64A0 /* SignUpView.swift */,
-				01C68D392A576A71004F64A0 /* HomeScreenView.swift */,
-				01C68D352A576A53004F64A0 /* LoginView.swift */,
+				014949332A5771BC0063FCF8 /* ViewModels */,
+				014949322A57719A0063FCF8 /* Views */,
 				01C68D2B2A576A2C004F64A0 /* Assets.xcassets */,
+				01C68D272A576A2C004F64A0 /* GardeningApp.swift */,
 				01C68D2D2A576A2C004F64A0 /* Preview Content */,
 			);
 			path = Gardening;
@@ -123,6 +144,7 @@
 				014949252A576E2D0063FCF8 /* FirebaseFirestoreSwift */,
 				014949282A576E510063FCF8 /* ReceiptParser */,
 				0149492A2A576E510063FCF8 /* RevenueCat */,
+				014949302A576FA00063FCF8 /* GoogleMobileAds */,
 			);
 			productName = Gardening;
 			productReference = 01C68D242A576A2C004F64A0 /* Gardening.app */;
@@ -155,6 +177,7 @@
 			packageReferences = (
 				0149491C2A576E2D0063FCF8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				014949272A576E510063FCF8 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				0149492F2A576FA00063FCF8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 01C68D252A576A2C004F64A0 /* Products */;
 			projectDirPath = "";
@@ -185,6 +208,7 @@
 				01C68D382A576A62004F64A0 /* SignUpView.swift in Sources */,
 				01C68D362A576A53004F64A0 /* LoginView.swift in Sources */,
 				01C68D3A2A576A71004F64A0 /* HomeScreenView.swift in Sources */,
+				014949352A5771C90063FCF8 /* LoginViewModel.swift in Sources */,
 				01C68D282A576A2C004F64A0 /* GardeningApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +436,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		0149492F2A576FA00063FCF8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -449,6 +481,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 014949272A576E510063FCF8 /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
+		};
+		014949302A576FA00063FCF8 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0149492F2A576FA00063FCF8 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
