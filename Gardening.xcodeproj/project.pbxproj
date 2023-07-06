@@ -8,17 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		01C68D282A576A2C004F64A0 /* GardeningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D272A576A2C004F64A0 /* GardeningApp.swift */; };
-		01C68D2A2A576A2C004F64A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D292A576A2C004F64A0 /* ContentView.swift */; };
 		01C68D2C2A576A2C004F64A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2B2A576A2C004F64A0 /* Assets.xcassets */; };
 		01C68D2F2A576A2C004F64A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2E2A576A2C004F64A0 /* Preview Assets.xcassets */; };
+		01C68D362A576A53004F64A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D352A576A53004F64A0 /* LoginView.swift */; };
+		01C68D382A576A62004F64A0 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D372A576A62004F64A0 /* SignUpView.swift */; };
+		01C68D3A2A576A71004F64A0 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D392A576A71004F64A0 /* HomeScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		01C68D242A576A2C004F64A0 /* Gardening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gardening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C68D272A576A2C004F64A0 /* GardeningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardeningApp.swift; sourceTree = "<group>"; };
-		01C68D292A576A2C004F64A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		01C68D2B2A576A2C004F64A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01C68D2E2A576A2C004F64A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		01C68D352A576A53004F64A0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		01C68D372A576A62004F64A0 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		01C68D392A576A71004F64A0 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +56,9 @@
 			isa = PBXGroup;
 			children = (
 				01C68D272A576A2C004F64A0 /* GardeningApp.swift */,
-				01C68D292A576A2C004F64A0 /* ContentView.swift */,
+				01C68D372A576A62004F64A0 /* SignUpView.swift */,
+				01C68D392A576A71004F64A0 /* HomeScreenView.swift */,
+				01C68D352A576A53004F64A0 /* LoginView.swift */,
 				01C68D2B2A576A2C004F64A0 /* Assets.xcassets */,
 				01C68D2D2A576A2C004F64A0 /* Preview Content */,
 			);
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01C68D2A2A576A2C004F64A0 /* ContentView.swift in Sources */,
+				01C68D382A576A62004F64A0 /* SignUpView.swift in Sources */,
+				01C68D362A576A53004F64A0 /* LoginView.swift in Sources */,
+				01C68D3A2A576A71004F64A0 /* HomeScreenView.swift in Sources */,
 				01C68D282A576A2C004F64A0 /* GardeningApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
