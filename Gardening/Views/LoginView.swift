@@ -16,38 +16,53 @@ struct LoginView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Welcome")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            
-            TextField("Email", text: $viewModel.emailInput)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-            
-            SecureField("Password", text: $viewModel.passwordInput)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-            
-            Button(action: {
-                // Perform login action
-            }) {
-                Text("Login")
+        ZStack {
+            LinearGradient(colors: [Color.green, Color.blue], startPoint: .bottom, endPoint: .top)
+                .ignoresSafeArea(.all)
+            VStack(spacing: 20) {
+                Spacer()
+                Text("Welcome")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .font(.headline)
+                
+                TextField("Email", text: $viewModel.emailInput)
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .background(Color(.systemGray6))
                     .cornerRadius(8)
+                
+                SecureField("Password", text: $viewModel.passwordInput)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                
+                Button(action: {
+                    // Perform login action
+                }) {
+                    Text("Login")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                Spacer()
+                
+                NavigationLink {
+                    SignUpView(viewModel: SignUpViewModel())
+                } label: {
+                    Text("You don't have an accoun? Create one here.")
+                        .foregroundColor(.white)
+                    
+                }
+
+                
+                
             }
-            
-            // Add additional UI elements like forgot password, sign up, etc. here
-            
-        }
-        .padding()
+            .padding()
         .textFieldStyle(RoundedBorderTextFieldStyle())
+        }
     }
 }
 
