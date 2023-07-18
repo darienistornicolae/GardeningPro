@@ -25,15 +25,18 @@ struct LoginView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+                    .padding(.bottom)
                 
                 TextField("Email", text: $viewModel.emailInput)
                     .padding()
                     .background(Color(.systemGray6))
+                    .textFieldStyle(.plain)
                     .cornerRadius(8)
                 
                 SecureField("Password", text: $viewModel.passwordInput)
                     .padding()
                     .background(Color(.systemGray6))
+                    .textFieldStyle(.plain)
                     .cornerRadius(8)
                 
                 Button(action: {
@@ -56,12 +59,11 @@ struct LoginView: View {
                         .foregroundColor(.white)
                     
                 }
-
                 
                 
             }
             .padding()
-        .textFieldStyle(RoundedBorderTextFieldStyle())
+            .textFieldStyle(RoundedBorderTextFieldStyle())
         }
     }
 }

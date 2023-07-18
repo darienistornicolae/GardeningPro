@@ -23,27 +23,30 @@ struct SignUpView: View {
                 Text("Welcome")
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                    .padding(.bottom)
                     .foregroundColor(.white)
                 
                 TextField("Full Name", text: $viewModel.fullName)
                     .padding()
                     .background(Color(.systemGray6))
+                    .textFieldStyle(.plain)
                     .cornerRadius(8)
                 
                 TextField("Email", text: $viewModel.email)
                     .padding()
                     .background(Color(.systemGray6))
+                    .textFieldStyle(.plain)
                     .cornerRadius(8)
                 
                 SecureField("Password", text: $viewModel.password)
                     .padding()
                     .background(Color(.systemGray6))
+                    .textFieldStyle(.plain)
                     .cornerRadius(8)
                 
                 Button(action: {
-                    // Perform login action
                 }) {
-                    Text("Login")
+                    Text("Sign Up")
                         .foregroundColor(.white)
                         .font(.headline)
                         .padding()
@@ -54,7 +57,7 @@ struct SignUpView: View {
                 
             }
             .padding()
-        .textFieldStyle(RoundedBorderTextFieldStyle())
+            .textFieldStyle(RoundedBorderTextFieldStyle())
         }
     }
 }

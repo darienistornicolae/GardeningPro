@@ -9,25 +9,34 @@ import SwiftUI
 
 struct CreateGardenOnboardingView: View {
     @State var gardenName: String = ""
+    
+    init() {
+        let navBarAppearance = UINavigationBar.appearance()
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
                 LinearGradient(colors: [Color.green, Color.blue], startPoint: .bottom, endPoint: .top)
                     .ignoresSafeArea(.all)
                 VStack {
-                    Text("Let's add your first garden")
+                    Text("Let's create your first garden")
                         .font(.title2)
+                        .padding(.top, 30)
                     
                     TextField("Input your garden name", text: $gardenName)
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
+                        .padding(.top, 40)
                     Spacer()
                     
                     Button(action: {
                         
                     }) {
-                        Text("Add Plant")
+                        Text("Add Garden")
                             .foregroundColor(.white)
                             .font(.headline)
                             .padding()
@@ -35,10 +44,11 @@ struct CreateGardenOnboardingView: View {
                             .background(Color.blue)
                             .cornerRadius(8)
                     }
-
+                    
                 }
                 .navigationTitle("Hello, Nick!")
-                .padding()
+                .foregroundColor(.white)
+                .padding(20)
             }
         }
     }
