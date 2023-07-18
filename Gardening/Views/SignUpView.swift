@@ -44,6 +44,7 @@ struct SignUpView: View {
                     .textFieldStyle(.plain)
                     .cornerRadius(8)
                 
+                
                 Button(action: {
                 }) {
                     Text("Sign Up")

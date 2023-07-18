@@ -35,12 +35,15 @@ struct AddPlantOnboardingView: View {
                         
                         VStack {
                             searchBar
-                            
                             List {
-                               // Text("Ma'ta")
+                                
                             }
-                            
+                            .listRowBackground(Color.black)
+                            .listStyle(.plain)
+                            .background(Color.gray)
                             .cornerRadius(10)
+                            
+                            
                             Spacer()
                             Button(action: {
                             }) {
@@ -53,6 +56,7 @@ struct AddPlantOnboardingView: View {
                                     .cornerRadius(8)
                             }
                         }
+                        
                         .padding()
                     }
                     
