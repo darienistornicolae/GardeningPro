@@ -8,9 +8,13 @@
 import Foundation
 import Combine
 
+@MainActor
 
-class LoginViewModel: ObservableObject {
+final class LoginViewModel: ObservableObject {
+    
     @Published var emailInput: String = ""
     @Published var passwordInput: String = ""
+    
+    
     
 }

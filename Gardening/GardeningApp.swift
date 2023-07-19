@@ -7,7 +7,7 @@
 
 import SwiftUI
 //import RevenueCat
-//import FirebaseCore
+import FirebaseCore
 //import GoogleMobileAds
 
 
@@ -15,12 +15,12 @@ import SwiftUI
 @main
 struct GardeningApp: App {
     
-//    init() {
-//        FirebaseApp.configure()
+    init() {
+        FirebaseApp.configure()
 //        GADMobileAds.sharedInstance().start(completionHandler: nil)
 //        Purchases.logLevel = .debug
 //        Purchases.configure(withAPIKey: "appl_jWKLVAnpkjXeJobUQlyOrzLRkkn")
-//    }
+    }
     
     var body: some Scene {
         WindowGroup {

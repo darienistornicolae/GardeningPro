@@ -26,11 +26,11 @@ struct SignUpView: View {
                     .padding(.bottom)
                     .foregroundColor(.white)
                 
-                TextField("Full Name", text: $viewModel.fullName)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .textFieldStyle(.plain)
-                    .cornerRadius(8)
+//                TextField("Full Name", text: $viewModel.fullName)
+//                    .padding()
+//                    .background(Color(.systemGray6))
+//                    .textFieldStyle(.plain)
+//                    .cornerRadius(8)
                 
                 TextField("Email", text: $viewModel.email)
                     .padding()
@@ -46,6 +46,7 @@ struct SignUpView: View {
                 
                 
                 Button(action: {
+                    viewModel.signUp()
                 }) {
                     Text("Sign Up")
                         .foregroundColor(.white)

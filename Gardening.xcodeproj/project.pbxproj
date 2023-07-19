@@ -17,6 +17,9 @@
 		0149492E2A576F520063FCF8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0149492D2A576F520063FCF8 /* StoreKit.framework */; };
 		014949312A576FA00063FCF8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 014949302A576FA00063FCF8 /* GoogleMobileAds */; };
 		014949352A5771C90063FCF8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014949342A5771C90063FCF8 /* LoginViewModel.swift */; };
+		01BE231B2A68477300E3E906 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01BE231A2A68477300E3E906 /* GoogleService-Info.plist */; };
+		01BE231D2A68498F00E3E906 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BE231C2A68498F00E3E906 /* AuthenticationManager.swift */; };
+		01BE23202A684AEA00E3E906 /* AuthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BE231F2A684AEA00E3E906 /* AuthDataModel.swift */; };
 		01C68D282A576A2C004F64A0 /* GardeningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D272A576A2C004F64A0 /* GardeningApp.swift */; };
 		01C68D2C2A576A2C004F64A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2B2A576A2C004F64A0 /* Assets.xcassets */; };
 		01C68D2F2A576A2C004F64A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2E2A576A2C004F64A0 /* Preview Assets.xcassets */; };
@@ -33,6 +36,9 @@
 /* Begin PBXFileReference section */
 		0149492D2A576F520063FCF8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		014949342A5771C90063FCF8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		01BE231A2A68477300E3E906 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		01BE231C2A68498F00E3E906 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		01BE231F2A684AEA00E3E906 /* AuthDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataModel.swift; sourceTree = "<group>"; };
 		01C68D242A576A2C004F64A0 /* Gardening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gardening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C68D272A576A2C004F64A0 /* GardeningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardeningApp.swift; sourceTree = "<group>"; };
 		01C68D2B2A576A2C004F64A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,6 +102,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		01BE231E2A684ADF00E3E906 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				01BE231F2A684AEA00E3E906 /* AuthDataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		01C68D1B2A576A2B004F64A0 = {
 			isa = PBXGroup;
 			children = (
@@ -116,11 +130,13 @@
 		01C68D262A576A2C004F64A0 /* Gardening */ = {
 			isa = PBXGroup;
 			children = (
+				01BE231E2A684ADF00E3E906 /* Model */,
 				01DC64332A5CAE8600553318 /* Services */,
 				01DC64302A5CAD3500553318 /* Extensions */,
 				014949332A5771BC0063FCF8 /* ViewModels */,
 				014949322A57719A0063FCF8 /* Views */,
 				01C68D2B2A576A2C004F64A0 /* Assets.xcassets */,
+				01BE231A2A68477300E3E906 /* GoogleService-Info.plist */,
 				01C68D272A576A2C004F64A0 /* GardeningApp.swift */,
 				01C68D2D2A576A2C004F64A0 /* Preview Content */,
 			);
@@ -147,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				01DC64342A5CAE9500553318 /* APICall.swift */,
+				01BE231C2A68498F00E3E906 /* AuthenticationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -226,6 +243,7 @@
 			files = (
 				01C68D2F2A576A2C004F64A0 /* Preview Assets.xcassets in Resources */,
 				01C68D2C2A576A2C004F64A0 /* Assets.xcassets in Resources */,
+				01BE231B2A68477300E3E906 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +256,8 @@
 			files = (
 				01C68D382A576A62004F64A0 /* SignUpView.swift in Sources */,
 				01C68D362A576A53004F64A0 /* LoginView.swift in Sources */,
+				01BE231D2A68498F00E3E906 /* AuthenticationManager.swift in Sources */,
+				01BE23202A684AEA00E3E906 /* AuthDataModel.swift in Sources */,
 				01C68D3A2A576A71004F64A0 /* HomeScreenView.swift in Sources */,
 				01DC64372A5CB16B00553318 /* CreateGardenOnboardingView.swift in Sources */,
 				01DC64322A5CAD4500553318 /* ColorsExtensions.swift in Sources */,
@@ -377,12 +397,12 @@
 				DEVELOPMENT_TEAM = V975Z3G3HV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -410,12 +430,12 @@
 				DEVELOPMENT_TEAM = V975Z3G3HV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

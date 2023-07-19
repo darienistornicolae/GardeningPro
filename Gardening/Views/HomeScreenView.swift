@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct HomeScreenView: View {
+    private let manager = AuthenticationManager()
+    @State private var showSignInView: Bool = false
     var body: some View {
         NavigationView {
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
         }
-        
+        .onAppear {
+            let authUser = try?  manager.getAuthenticatedUser()
+            self.showSignInView = authUser == nil ? true: false
+        }
     }
 }
 
