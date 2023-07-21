@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SignUpViewModel: ObservableObject {
+class SignInViewModel: ObservableObject {
     @Published var fullName: String = ""
     @Published var email: String = ""
     @Published var password: String = ""

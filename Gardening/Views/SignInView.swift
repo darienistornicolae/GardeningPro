@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct SignUpView: View {
+struct SignInView: View {
     
-    @StateObject var viewModel = SignUpViewModel()
+    @StateObject var viewModel = SignInViewModel()
     
-    init(viewModel: SignUpViewModel) {
+    init(viewModel: SignInViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -47,8 +47,10 @@ struct SignUpView: View {
                 
                 Button(action: {
                     viewModel.signUp()
+                    
+
                 }) {
-                    Text("Sign Up")
+                    Text("Sign In")
                         .foregroundColor(.white)
                         .font(.headline)
                         .padding()
@@ -60,12 +62,13 @@ struct SignUpView: View {
             }
             .padding()
             .textFieldStyle(RoundedBorderTextFieldStyle())
+            
         }
     }
 }
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(viewModel: SignUpViewModel())
+        SignInView(viewModel: SignInViewModel())
     }
 }

@@ -6,23 +6,32 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
 struct HomeScreenView: View {
-    private let manager = AuthenticationManager()
-    @State private var showSignInView: Bool = false
+    
+    @StateObject private var viewModel = HomeScreenViewModel()
+    @Binding var showLogInView: Bool
     var body: some View {
-        NavigationView {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            
+            Button("Log Out") {
+                Task {
+                    do {
+                        try viewModel.logOut()
+                        showLogInView = true
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+
         }
-        .onAppear {
-            let authUser = try?  manager.getAuthenticatedUser()
-            self.showSignInView = authUser == nil ? true: false
-        }
+        
     }
 }
 
 struct HomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreenView()
+        HomeScreenView(showLogInView: .constant(false))
     }
 }

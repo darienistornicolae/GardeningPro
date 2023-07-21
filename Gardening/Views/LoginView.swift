@@ -42,7 +42,7 @@ struct LoginView: View {
                     
                     
                     Button(action: {
-                        viewModel.logIn()
+                       // viewModel.logIn()
                     }) {
                         Text("Login")
                             .foregroundColor(.white)
@@ -55,7 +55,7 @@ struct LoginView: View {
                     Spacer()
                     
                     NavigationLink {
-                        SignUpView(viewModel: SignUpViewModel())
+                        SignInView(viewModel: SignInViewModel())
                     } label: {
                         Text("You don't have an accoun? Create one here.")
                             .foregroundColor(.white)

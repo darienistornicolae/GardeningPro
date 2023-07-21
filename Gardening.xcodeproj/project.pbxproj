@@ -24,13 +24,15 @@
 		01C68D2C2A576A2C004F64A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2B2A576A2C004F64A0 /* Assets.xcassets */; };
 		01C68D2F2A576A2C004F64A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2E2A576A2C004F64A0 /* Preview Assets.xcassets */; };
 		01C68D362A576A53004F64A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D352A576A53004F64A0 /* LoginView.swift */; };
-		01C68D382A576A62004F64A0 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D372A576A62004F64A0 /* SignUpView.swift */; };
+		01C68D382A576A62004F64A0 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D372A576A62004F64A0 /* SignInView.swift */; };
 		01C68D3A2A576A71004F64A0 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D392A576A71004F64A0 /* HomeScreenView.swift */; };
-		01DC642F2A5CABB800553318 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC642E2A5CABB800553318 /* SignUpViewModel.swift */; };
+		01DC642F2A5CABB800553318 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC642E2A5CABB800553318 /* SignInViewModel.swift */; };
 		01DC64322A5CAD4500553318 /* ColorsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC64312A5CAD4500553318 /* ColorsExtensions.swift */; };
 		01DC64352A5CAE9500553318 /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC64342A5CAE9500553318 /* APICall.swift */; };
 		01DC64372A5CB16B00553318 /* CreateGardenOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC64362A5CB16B00553318 /* CreateGardenOnboardingView.swift */; };
 		01DC64392A5CB3E700553318 /* AddPlantOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC64382A5CB3E700553318 /* AddPlantOnboardingView.swift */; };
+		01FB7E812A6AB5B6000B71CC /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FB7E802A6AB5B6000B71CC /* HomeScreenViewModel.swift */; };
+		01FB7E832A6AB834000B71CC /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FB7E822A6AB834000B71CC /* RootView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,13 +46,15 @@
 		01C68D2B2A576A2C004F64A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01C68D2E2A576A2C004F64A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		01C68D352A576A53004F64A0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		01C68D372A576A62004F64A0 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		01C68D372A576A62004F64A0 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		01C68D392A576A71004F64A0 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
-		01DC642E2A5CABB800553318 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		01DC642E2A5CABB800553318 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		01DC64312A5CAD4500553318 /* ColorsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsExtensions.swift; sourceTree = "<group>"; };
 		01DC64342A5CAE9500553318 /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		01DC64362A5CB16B00553318 /* CreateGardenOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGardenOnboardingView.swift; sourceTree = "<group>"; };
 		01DC64382A5CB3E700553318 /* AddPlantOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantOnboardingView.swift; sourceTree = "<group>"; };
+		01FB7E802A6AB5B6000B71CC /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		01FB7E822A6AB834000B71CC /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,11 +88,12 @@
 		014949322A57719A0063FCF8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				01C68D372A576A62004F64A0 /* SignUpView.swift */,
+				01C68D372A576A62004F64A0 /* SignInView.swift */,
 				01C68D392A576A71004F64A0 /* HomeScreenView.swift */,
 				01C68D352A576A53004F64A0 /* LoginView.swift */,
 				01DC64362A5CB16B00553318 /* CreateGardenOnboardingView.swift */,
 				01DC64382A5CB3E700553318 /* AddPlantOnboardingView.swift */,
+				01FB7E822A6AB834000B71CC /* RootView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -97,7 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				014949342A5771C90063FCF8 /* LoginViewModel.swift */,
-				01DC642E2A5CABB800553318 /* SignUpViewModel.swift */,
+				01DC642E2A5CABB800553318 /* SignInViewModel.swift */,
+				01FB7E802A6AB5B6000B71CC /* HomeScreenViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -254,15 +260,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01C68D382A576A62004F64A0 /* SignUpView.swift in Sources */,
+				01C68D382A576A62004F64A0 /* SignInView.swift in Sources */,
 				01C68D362A576A53004F64A0 /* LoginView.swift in Sources */,
 				01BE231D2A68498F00E3E906 /* AuthenticationManager.swift in Sources */,
 				01BE23202A684AEA00E3E906 /* AuthDataModel.swift in Sources */,
+				01FB7E832A6AB834000B71CC /* RootView.swift in Sources */,
 				01C68D3A2A576A71004F64A0 /* HomeScreenView.swift in Sources */,
 				01DC64372A5CB16B00553318 /* CreateGardenOnboardingView.swift in Sources */,
 				01DC64322A5CAD4500553318 /* ColorsExtensions.swift in Sources */,
 				014949352A5771C90063FCF8 /* LoginViewModel.swift in Sources */,
-				01DC642F2A5CABB800553318 /* SignUpViewModel.swift in Sources */,
+				01DC642F2A5CABB800553318 /* SignInViewModel.swift in Sources */,
+				01FB7E812A6AB5B6000B71CC /* HomeScreenViewModel.swift in Sources */,
 				01DC64392A5CB3E700553318 /* AddPlantOnboardingView.swift in Sources */,
 				01DC64352A5CAE9500553318 /* APICall.swift in Sources */,
 				01C68D282A576A2C004F64A0 /* GardeningApp.swift in Sources */,

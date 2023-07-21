@@ -14,9 +14,9 @@ import FirebaseCore
 
 @main
 struct GardeningApp: App {
-    
     init() {
         FirebaseApp.configure()
+        
 //        GADMobileAds.sharedInstance().start(completionHandler: nil)
 //        Purchases.logLevel = .debug
 //        Purchases.configure(withAPIKey: "appl_jWKLVAnpkjXeJobUQlyOrzLRkkn")
@@ -24,7 +24,8 @@ struct GardeningApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoginView(viewModel: LoginViewModel())
+            RootView()
+            
         }
     }
 }
