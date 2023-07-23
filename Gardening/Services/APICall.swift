@@ -10,14 +10,17 @@ import Combine
 
 
 class APICall: ObservableObject {
-    @Published var name: String? = nil
     
-    func getPlants(name: String) async throws {
-        guard let url = URL(string: "") else { return }
+    func getPlants(plantName: String) async throws -> Data {
+        let apiKey: String = "sk-SWhc64a73409f079d1492"
+        guard let url = URL(string: "https://perenual.com/api/species-list?key=\(apiKey)&q=\(plantName)") else {
+            throw URLError(.badURL)
+        }
         do {
-            try await URLSession.shared.data(from: url)
-        } catch <#pattern#> {
-            <#statements#>
+            let (data, _) = try await URLSession.shared.data(from: url)
+            return data
+        } catch {
+            throw error
         }
     }
 }
