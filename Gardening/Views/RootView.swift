@@ -2,26 +2,23 @@
 //  RootView.swift
 //  Gardening
 //
-//  Created by Darie-Nistor Nicolae on 21.07.2023.
+//  Created by Darie-Nistor Nicolae on 25.07.2023.
 //
 
 import SwiftUI
 
 struct RootView: View {
-    
-    @State private var showLogInView: Bool = false
-    private let manager = AuthenticationManager()
+    @EnvironmentObject var authViewModel: AuthenticationManager
+   
     var body: some View {
-        NavigationView {
-            HomeScreenView(showLogInView: $showLogInView)
+        Group {
+            if authViewModel.userSession != nil {
+                HomeScreenView()
+            } else {
+                LoginView()
+            }
         }
-        .fullScreenCover(isPresented: $showLogInView, content: {
-            LoginView(viewModel: LoginViewModel())
-        })
-        .onAppear {
-            let authUser = try? manager.getAuthenticatedUser()
-            self.showLogInView = authUser == nil ? true : false
-        }
+        
     }
 }
 

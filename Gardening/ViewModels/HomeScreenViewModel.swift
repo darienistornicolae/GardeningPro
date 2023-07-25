@@ -7,13 +7,13 @@
 
 import Foundation
 
-@MainActor
 final class HomeScreenViewModel: ObservableObject {
     
-    private let manager = AuthenticationManager()
-    
-    func logOut() throws {
-        
-       try manager.signOut()
-    }
+//    private let manager = AuthenticationManager()
+//    
+//    
+//    func logOut()  {
+//        
+//        manager.signOut()
+//    }
 }

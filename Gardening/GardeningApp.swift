@@ -14,6 +14,7 @@ import FirebaseCore
 
 @main
 struct GardeningApp: App {
+    @StateObject var authViewModel = AuthenticationManager()
     init() {
         FirebaseApp.configure()
         
@@ -25,6 +26,7 @@ struct GardeningApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environmentObject(authViewModel)
             
         }
     }

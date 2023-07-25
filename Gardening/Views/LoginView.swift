@@ -10,62 +10,53 @@ import SwiftUI
 struct LoginView: View {
     
     @StateObject private var viewModel = LoginViewModel()
-    
-    init(viewModel: LoginViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @EnvironmentObject private var manager: AuthenticationManager
     
     var body: some View {
         NavigationView {
             ZStack {
                 LinearGradient(colors: [Color.green, Color.blue], startPoint: .bottom, endPoint: .top)
                     .ignoresSafeArea(.all)
-                VStack(spacing: 20) {
-                    Spacer()
-                    Text("Welcome")
+                
+                VStack() {
+                    Text("Welcome!")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding(.bottom)
                     
-                    TextField("Email", text: $viewModel.emailInput)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .textFieldStyle(.plain)
-                        .cornerRadius(8)
+                    InputView(text: $viewModel.emailInput, placeholder: "Email")
+                        .autocapitalization(.none)
+                    InputView(text: $viewModel.passwordInput, placeholder: "Password", isSecureField: true)
                     
-                    SecureField("Password", text: $viewModel.passwordInput)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .textFieldStyle(.plain)
-                        .cornerRadius(8)
-                    
-                    
-                    Button(action: {
-                       // viewModel.logIn()
-                    }) {
-                        Text("Login")
+                    Button {
+                        Task {
+                            try await manager.signIn(email: viewModel.emailInput ,password: viewModel.passwordInput)
+                        }
+                    } label: {
+                        Text("Sign In")
                             .foregroundColor(.white)
                             .font(.headline)
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(Color.blue)
                             .cornerRadius(8)
+                            .disabled(!formIsValid)
+                            .opacity(formIsValid ? 1.0 : 0.5)
                     }
-                    Spacer()
+                    .padding()
                     
                     NavigationLink {
-                        SignInView(viewModel: SignInViewModel())
+                        SignUpView()
+                            .navigationBarBackButtonHidden(true)
                     } label: {
-                        Text("You don't have an accoun? Create one here.")
-                            .foregroundColor(.white)
-                        
+                        HStack(spacing: 5) {
+                            Text("Don't have an account?")
+                            Text("Sign Up!")
+                                .fontWeight(.bold)
+                        }
                     }
-                    
-                    
                 }
-                .padding()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
             }
         }
         .accentColor(Color.white)
@@ -75,6 +66,15 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(viewModel: LoginViewModel())
+        LoginView()
     }
+}
+
+extension LoginView: AuthenticationFormProtocol {
+    var formIsValid: Bool {
+        return !viewModel.emailInput.isEmpty &&
+        viewModel.emailInput.contains("@") &&
+        !viewModel.passwordInput.isEmpty &&
+        viewModel.passwordInput.count > 5
+    } 
 }
