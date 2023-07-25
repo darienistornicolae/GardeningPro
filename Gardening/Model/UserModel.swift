@@ -26,3 +26,18 @@ struct UserModel: Identifiable, Codable {
 extension UserModel {
     static var MOCK_USER = UserModel(id: NSUUID().uuidString, fullName: "Kobe Bryant", email: "test@gmail.com")
 }
+
+struct IdealUser: Identifiable, Codable {
+    let id: String
+    let fullName: String
+    let email: String
+    let gardens: [String]
+    let plant: [idealPlant]
+    
+}
+
+struct idealPlant: Codable {
+    let plantName: String
+    let plantType: String
+    let prunningTime: Date
+}

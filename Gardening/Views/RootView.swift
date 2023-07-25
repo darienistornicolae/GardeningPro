@@ -13,7 +13,21 @@ struct RootView: View {
     var body: some View {
         Group {
             if authViewModel.userSession != nil {
-                HomeScreenView()
+                TabView {
+                    
+                    GardenView()
+                        .tabItem {
+                            Image(systemName: "camera.macro")
+                            Text("Garden")
+                        }
+                    
+                    HomeScreenView()
+                        .tabItem {
+                            Image(systemName: "person.fill")
+                            Text("Profile")
+                        }
+                }
+                
             } else {
                 LoginView()
             }
@@ -25,5 +39,6 @@ struct RootView: View {
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView()
+            .environmentObject(AuthenticationManager())
     }
 }

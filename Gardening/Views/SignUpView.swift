@@ -12,13 +12,21 @@ struct SignUpView: View {
     @StateObject var viewModel = SignUpViewModel()
     //@Binding var showLogInView: Bool
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var user: AuthenticationManager
     
     var body: some View {
+        
         ZStack {
-            LinearGradient(colors: [Color.green, Color.blue], startPoint: .bottom, endPoint: .top)
-                .ignoresSafeArea(.all)
-            VStack() {
+            if colorScheme == .dark {
+                LinearGradient(colors: [Color.black, Color.green], startPoint: .bottom, endPoint: .top)
+                    .ignoresSafeArea(.all)
+            } else {
+                LinearGradient(colors: [Color.blue, Color.green], startPoint: .bottom, endPoint: .top)
+                    .ignoresSafeArea(.all)
+            }
+            VStack(spacing: -5) {
+                Spacer()
                 Text("Welcome")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -37,14 +45,14 @@ struct SignUpView: View {
                     if !viewModel.password.isEmpty && !viewModel.confirmPassword.isEmpty {
                         if viewModel.password == viewModel.confirmPassword {
                             Image (systemName: "checkmark.circle.fill")
-                            .imageScale(.large)
-                            .padding()
-                            .foregroundColor(Color(.systemGreen))
+                                .imageScale(.large)
+                                .padding()
+                                .foregroundColor(Color(.systemGreen))
                         } else {
                             Image (systemName: "xmark.circle.fill")
-                            .imageScale(.large)
-                            .padding()
-                            .foregroundColor(Color(.systemRed))
+                                .imageScale(.large)
+                                .padding()
+                                .foregroundColor(Color(.systemRed))
                         }
                     }
                 }
@@ -66,7 +74,7 @@ struct SignUpView: View {
                         .cornerRadius(8)
                 }
                 .padding()
-                
+                Spacer()
                 Button {
                     dismiss()
                 } label: {
@@ -77,10 +85,11 @@ struct SignUpView: View {
                     }
                     .accentColor(.white)
                 }
-
+                
                 
             }
             .padding()
+            .transition(.slide)
             
         }
     }

@@ -11,14 +11,21 @@ struct LoginView: View {
     
     @StateObject private var viewModel = LoginViewModel()
     @EnvironmentObject private var manager: AuthenticationManager
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(colors: [Color.green, Color.blue], startPoint: .bottom, endPoint: .top)
-                    .ignoresSafeArea(.all)
+                if colorScheme == .dark {
+                    LinearGradient(colors: [Color.black, Color.green], startPoint: .bottom, endPoint: .top)
+                        .ignoresSafeArea(.all)
+                } else {
+                    LinearGradient(colors: [Color.blue, Color.green], startPoint: .bottom, endPoint: .top)
+                        .ignoresSafeArea(.all)
+                }
                 
-                VStack() {
+                VStack(spacing: -5) {
+                    Spacer()
                     Text("Welcome!")
                         .font(.largeTitle)
                         .fontWeight(.bold)
@@ -34,7 +41,7 @@ struct LoginView: View {
                             try await manager.signIn(email: viewModel.emailInput ,password: viewModel.passwordInput)
                         }
                     } label: {
-                        Text("Sign In")
+                        Text("Log In")
                             .foregroundColor(.white)
                             .font(.headline)
                             .padding()
@@ -45,7 +52,7 @@ struct LoginView: View {
                             .opacity(formIsValid ? 1.0 : 0.5)
                     }
                     .padding()
-                    
+                    Spacer()
                     NavigationLink {
                         SignUpView()
                             .navigationBarBackButtonHidden(true)

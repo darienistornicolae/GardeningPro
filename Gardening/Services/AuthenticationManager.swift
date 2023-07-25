@@ -23,7 +23,11 @@ final class AuthenticationManager: ObservableObject {
         self.userSession = Auth.auth().currentUser
         
         Task {
-            await fetchUser()
+            do {
+                try await fetchUser()
+            } catch {
+                print("ERROR: Unable to fetch user. \(error.localizedDescription)")
+            }
         }
     }
     
@@ -31,7 +35,7 @@ final class AuthenticationManager: ObservableObject {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
-            await fetchUser()
+            try await fetchUser()
         } catch {
             print("Failed to Log in: \(error.localizedDescription)")
         }
@@ -44,29 +48,24 @@ final class AuthenticationManager: ObservableObject {
             let user = UserModel(id: result.user.uid, fullName: fullName, email: email)
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-            await fetchUser()
+            try await fetchUser()
         } catch  {
-           print(error.localizedDescription)
+           print("ERROR: User creation failed. \(error.localizedDescription)")
         }
     }
-//
-//    func getAuthenticatedUser() throws -> AuthDataModel {
-//        guard let user = Auth.auth().currentUser else {
-//            throw URLError(.badServerResponse)
-//        }
-//        return AuthDataModel(user: user)
-//    }
     
-    func fetchUser() async {
-        
-        //implement error handling, do-catch block
+    func fetchUser() async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
-        self.currentUser = try? snapshot.data(as: UserModel.self)
+        let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+        guard let data = snapshot.data() else { throw URLError(.badServerResponse) }
+        let user = try Firestore.Decoder().decode(UserModel.self, from: data)
+        self.currentUser = user
+    }
+    
+    func deleteUser() {
         
     }
-    func deleteUser() {
-    }
+    
     func signOut() {
         do {
             try Auth.auth().signOut()

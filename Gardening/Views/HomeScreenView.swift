@@ -44,13 +44,13 @@ struct HomeScreenView: View {
                         
                     } label: {
                         SettingsRowView(imageName: "arrow.left.circle.fill", title: "Sign Out", tintColor: Color.red)
-                            .accentColor(.black)
+                            
                     }
                     Button {
                         print("")
                     } label: {
                         SettingsRowView(imageName: "xmark.circle.fill", title: "Delete Account", tintColor: Color.red)
-                            .accentColor(.black)
+                            
                     }
                     
                 }
@@ -63,5 +63,6 @@ struct HomeScreenView: View {
 struct HomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
         HomeScreenView()
+            .environmentObject(AuthenticationManager())
     }
 }
