@@ -9,9 +9,9 @@ import SwiftUI
 
 struct AddPlantOnboardingView: View {
     
-    
+    @Environment(\.colorScheme) var colorScheme
     @State var searchText: String = ""
-    
+    @EnvironmentObject var garden: AuthenticationManager
     init() {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
@@ -21,10 +21,15 @@ struct AddPlantOnboardingView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(colors: [Color.green, Color.blue], startPoint: .bottom, endPoint: .top)
-                    .ignoresSafeArea(.all)
+                if colorScheme == .dark {
+                    LinearGradient(colors: [Color.black, Color.green], startPoint: .bottom, endPoint: .top)
+                        .ignoresSafeArea(.all)
+                } else {
+                    LinearGradient(colors: [Color.blue, Color.green], startPoint: .bottom, endPoint: .top)
+                        .ignoresSafeArea(.all)
+                }
                 VStack {
-                    Text("Great! Now, it's time to add some plants into your garden! You can add as many plants as you want")
+                    Text("Great! Now, it's time to add some plants into your garden! You can add as many plants as you want.")
                         .multilineTextAlignment(.leading)
                         .font(.title2)
                         .foregroundColor(.white)
@@ -63,7 +68,8 @@ struct AddPlantOnboardingView: View {
                     
                     Spacer()
                 }
-                .navigationTitle("Nick's Garden Name")
+                .navigationTitle(garden.currentGarden?.gardenName ?? "No name")
+
                 .padding()
             }
         }

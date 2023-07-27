@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct CreateGardenOnboardingView: View {
-    @State var gardenName: String = ""
-    
+    @StateObject var viewModel = CreateGardenOnboardingViewModel()
+    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var garden: AuthenticationManager
     init() {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
@@ -19,29 +20,32 @@ struct CreateGardenOnboardingView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(colors: [Color.green, Color.blue], startPoint: .bottom, endPoint: .top)
-                    .ignoresSafeArea(.all)
+                if colorScheme == .dark {
+                    LinearGradient(colors: [Color.black, Color.green], startPoint: .bottom, endPoint: .top)
+                        .ignoresSafeArea(.all)
+                } else {
+                    LinearGradient(colors: [Color.blue, Color.green], startPoint: .bottom, endPoint: .top)
+                        .ignoresSafeArea(.all)
+                }
                 VStack {
                     Text("Let's create your first garden")
                         .font(.title2)
                         .padding(.top, 30)
                     
-                    TextField("Input your garden name", text: $gardenName)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(8)
-                        .padding(.top, 40)
+                    InputView(text: $viewModel.gardenName, placeholder: "Input your garden name")
                     Spacer()
                     
                     Button(action: {
-                        
+                        Task {
+                            try await garden.createGarden(gardenName:viewModel.gardenName, plants: [Datum(id: "", commonName: "", scientificName: [""], otherName: [""], cycle: "", watering: "", defaultImage: DefaultImage(imageID: 0, license: 0, licenseName: "", licenseURL: "", originalURL: "", regularURL: "", mediumURL: "", smallURL: "", thumbnail: ""))])
+                        }
                     }) {
                         Text("Add Garden")
                             .foregroundColor(.white)
                             .font(.headline)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background(Color.blue)
+                            .background(Color.green)
                             .cornerRadius(8)
                     }
                     

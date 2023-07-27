@@ -47,9 +47,13 @@ struct HomeScreenView: View {
                             
                     }
                     Button {
-                        print("")
+                        Task {
+                            try await manager.resetPassword(email: manager.currentUser?.email ?? "No email")
+                            print("Password Reset")
+                        }
                     } label: {
-                        SettingsRowView(imageName: "xmark.circle.fill", title: "Delete Account", tintColor: Color.red)
+                        
+                        SettingsRowView(imageName: "xmark.circle.fill", title: "Reset Password", tintColor: Color.red)
                             
                     }
                     

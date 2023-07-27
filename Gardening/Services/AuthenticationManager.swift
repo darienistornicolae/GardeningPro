@@ -18,6 +18,7 @@ protocol AuthenticationFormProtocol {
 final class AuthenticationManager: ObservableObject {
     @Published var userSession: User?
     @Published var currentUser: UserModel?
+    @Published var currentGarden: Garden?
     
     init() {
         self.userSession = Auth.auth().currentUser
@@ -25,6 +26,7 @@ final class AuthenticationManager: ObservableObject {
         Task {
             do {
                 try await fetchUser()
+                try await fetchGarden()
             } catch {
                 print("ERROR: Unable to fetch user. \(error.localizedDescription)")
             }
@@ -53,6 +55,60 @@ final class AuthenticationManager: ObservableObject {
            print("ERROR: User creation failed. \(error.localizedDescription)")
         }
     }
+    
+    func resetPassword(email: String) async throws {
+       try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+    
+    func createGarden(gardenName: String, plants: [Datum]) async throws {
+        guard let currentUser = currentUser else {
+            currentUser = nil
+            return
+        }
+        
+        let gardenId = UUID().uuidString
+        
+        do {
+            let garden = Garden(gardenId: gardenId, gardenName: gardenName, plants: [Datum(id: "", commonName: "", scientificName: [""], otherName: [""], cycle: "", watering: "", defaultImage: DefaultImage(imageID: 0, license: 0, licenseName: "", licenseURL: "", originalURL: "", regularURL: "", mediumURL: "", smallURL: "", thumbnail: ""))])
+            
+            // Encode the Garden object to a dictionary using JSONEncoder
+            let jsonEncoder = JSONEncoder()
+            let encodedGarden = try jsonEncoder.encode(garden)
+            guard let gardenData = try JSONSerialization.jsonObject(with: encodedGarden, options: []) as? [String: Any] else {
+                throw NSError(domain: "SerializationError", code: -1, userInfo: nil)
+            }
+            
+            let userGardensRef = Firestore.firestore().collection("users").document(currentUser.id).collection("Gardens")
+            try await userGardensRef.addDocument(data: gardenData) // Save the garden data as a document in the subcollection
+            
+            self.currentGarden = garden
+            try await fetchGarden()
+        } catch {
+            print("ERROR: Garden creation failed. \(error.localizedDescription)")
+        }
+    }
+
+
+    
+    func fetchGarden() async throws {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            throw NSError(domain: "AuthenticationError", code: -1, userInfo: nil)
+        }
+        
+        let userDocumentRef = Firestore.firestore().collection("users").document(uid)
+        let gardenDocumentSnapshot = try await userDocumentRef.collection("Gardens").document("gardenDocumentId").getDocument()
+        
+        if gardenDocumentSnapshot.exists, let data = gardenDocumentSnapshot.data() {
+            let garden = try Firestore.Decoder().decode(Garden.self, from: data)
+            self.currentGarden = garden
+        } else {
+            // Handle the case when the garden document or garden data is missing.
+            // You can set self.currentGarden to nil or take other appropriate actions.
+            throw NSError(domain: "DataNotFoundError", code: -1, userInfo: nil)
+        }
+    }
+
+
     
     func fetchUser() async throws {
         guard let uid = Auth.auth().currentUser?.uid else { return }

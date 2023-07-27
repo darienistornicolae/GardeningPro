@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		013C24332A708D780027325C /* GardenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C24322A708D780027325C /* GardenView.swift */; };
+		0148C4682A729A9F0030A26A /* CreateGardenOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148C4672A729A9F0030A26A /* CreateGardenOnboardingViewModel.swift */; };
 		0149491E2A576E2D0063FCF8 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0149491D2A576E2D0063FCF8 /* FirebaseAnalytics */; };
 		014949202A576E2D0063FCF8 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0149491F2A576E2D0063FCF8 /* FirebaseAnalyticsSwift */; };
 		014949222A576E2D0063FCF8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 014949212A576E2D0063FCF8 /* FirebaseAuth */; };
@@ -20,7 +21,6 @@
 		014949352A5771C90063FCF8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014949342A5771C90063FCF8 /* LoginViewModel.swift */; };
 		01BE231B2A68477300E3E906 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01BE231A2A68477300E3E906 /* GoogleService-Info.plist */; };
 		01BE231D2A68498F00E3E906 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BE231C2A68498F00E3E906 /* AuthenticationManager.swift */; };
-		01BE23202A684AEA00E3E906 /* AuthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BE231F2A684AEA00E3E906 /* AuthDataModel.swift */; };
 		01C68D282A576A2C004F64A0 /* GardeningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D272A576A2C004F64A0 /* GardeningApp.swift */; };
 		01C68D2C2A576A2C004F64A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2B2A576A2C004F64A0 /* Assets.xcassets */; };
 		01C68D2F2A576A2C004F64A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C68D2E2A576A2C004F64A0 /* Preview Assets.xcassets */; };
@@ -40,11 +40,11 @@
 
 /* Begin PBXFileReference section */
 		013C24322A708D780027325C /* GardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenView.swift; sourceTree = "<group>"; };
+		0148C4672A729A9F0030A26A /* CreateGardenOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGardenOnboardingViewModel.swift; sourceTree = "<group>"; };
 		0149492D2A576F520063FCF8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		014949342A5771C90063FCF8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		01BE231A2A68477300E3E906 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		01BE231C2A68498F00E3E906 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		01BE231F2A684AEA00E3E906 /* AuthDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataModel.swift; sourceTree = "<group>"; };
 		01C68D242A576A2C004F64A0 /* Gardening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gardening.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C68D272A576A2C004F64A0 /* GardeningApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardeningApp.swift; sourceTree = "<group>"; };
 		01C68D2B2A576A2C004F64A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 			children = (
 				014949342A5771C90063FCF8 /* LoginViewModel.swift */,
 				01DC642E2A5CABB800553318 /* SignUpViewModel.swift */,
+				0148C4672A729A9F0030A26A /* CreateGardenOnboardingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -117,7 +118,6 @@
 		01BE231E2A684ADF00E3E906 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				01BE231F2A684AEA00E3E906 /* AuthDataModel.swift */,
 				01C89CEB2A70215F00092C25 /* UserModel.swift */,
 			);
 			path = Model;
@@ -273,8 +273,8 @@
 				01C68D362A576A53004F64A0 /* LoginView.swift in Sources */,
 				01BE231D2A68498F00E3E906 /* AuthenticationManager.swift in Sources */,
 				01C89CEE2A702C2D00092C25 /* RootView.swift in Sources */,
-				01BE23202A684AEA00E3E906 /* AuthDataModel.swift in Sources */,
 				01C89CEA2A701F1500092C25 /* SettingsRowView.swift in Sources */,
+				0148C4682A729A9F0030A26A /* CreateGardenOnboardingViewModel.swift in Sources */,
 				01C68D3A2A576A71004F64A0 /* HomeScreenView.swift in Sources */,
 				01DC64372A5CB16B00553318 /* CreateGardenOnboardingView.swift in Sources */,
 				01C89CEC2A70215F00092C25 /* UserModel.swift in Sources */,

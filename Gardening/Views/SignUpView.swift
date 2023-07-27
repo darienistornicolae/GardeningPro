@@ -10,11 +10,12 @@ import SwiftUI
 struct SignUpView: View {
     
     @StateObject var viewModel = SignUpViewModel()
-    //@Binding var showLogInView: Bool
+    @State private var showCreateGardenOnboarding = false
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var user: AuthenticationManager
-    
+    @State private var isSignUpSuccessful = false
+
     var body: some View {
         
         ZStack {
@@ -49,7 +50,7 @@ struct SignUpView: View {
                                 .padding()
                                 .foregroundColor(Color(.systemGreen))
                         } else {
-                            Image (systemName: "xmark.circle.fill")
+                            Image(systemName: "xmark.circle.fill")
                                 .imageScale(.large)
                                 .padding()
                                 .foregroundColor(Color(.systemRed))
@@ -60,7 +61,13 @@ struct SignUpView: View {
                 
                 Button {
                     Task {
-                        try await user.createUser(email:viewModel.email, password:viewModel.password, fullName: viewModel.fullName)
+                        do {
+                            try await user.createUser(email:viewModel.email, password:viewModel.password, fullName: viewModel.fullName)
+                            isSignUpSuccessful = true
+                            showCreateGardenOnboarding = true 
+                        } catch {
+                            print("Error creating user: \(error.localizedDescription)")
+                        }
                     }
                 } label: {
                     Text("Sign In")
