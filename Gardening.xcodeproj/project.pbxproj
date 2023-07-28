@@ -94,11 +94,7 @@
 		014949322A57719A0063FCF8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				01C68D372A576A62004F64A0 /* SignUpView.swift */,
 				01C68D392A576A71004F64A0 /* HomeScreenView.swift */,
-				01C68D352A576A53004F64A0 /* LoginView.swift */,
-				01DC64362A5CB16B00553318 /* CreateGardenOnboardingView.swift */,
-				01DC64382A5CB3E700553318 /* AddPlantOnboardingView.swift */,
 				01C89CED2A702C2D00092C25 /* RootView.swift */,
 				013C24322A708D780027325C /* GardenView.swift */,
 			);
@@ -143,14 +139,15 @@
 		01C68D262A576A2C004F64A0 /* Gardening */ = {
 			isa = PBXGroup;
 			children = (
+				01EE292E2A73EC4F00E91F28 /* Authentication */,
 				01BE231E2A684ADF00E3E906 /* Model */,
 				01DC64332A5CAE8600553318 /* Services */,
 				01DC64302A5CAD3500553318 /* Extensions */,
 				014949332A5771BC0063FCF8 /* ViewModels */,
 				014949322A57719A0063FCF8 /* Views */,
+				01C68D272A576A2C004F64A0 /* GardeningApp.swift */,
 				01C68D2B2A576A2C004F64A0 /* Assets.xcassets */,
 				01BE231A2A68477300E3E906 /* GoogleService-Info.plist */,
-				01C68D272A576A2C004F64A0 /* GardeningApp.swift */,
 				01C68D2D2A576A2C004F64A0 /* Preview Content */,
 			);
 			path = Gardening;
@@ -178,9 +175,20 @@
 			isa = PBXGroup;
 			children = (
 				01DC64342A5CAE9500553318 /* APICall.swift */,
-				01BE231C2A68498F00E3E906 /* AuthenticationManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		01EE292E2A73EC4F00E91F28 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				01BE231C2A68498F00E3E906 /* AuthenticationManager.swift */,
+				01DC64362A5CB16B00553318 /* CreateGardenOnboardingView.swift */,
+				01DC64382A5CB3E700553318 /* AddPlantOnboardingView.swift */,
+				01C68D372A576A62004F64A0 /* SignUpView.swift */,
+				01C68D352A576A53004F64A0 /* LoginView.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

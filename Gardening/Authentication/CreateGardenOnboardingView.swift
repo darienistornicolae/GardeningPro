@@ -11,6 +11,7 @@ struct CreateGardenOnboardingView: View {
     @StateObject var viewModel = CreateGardenOnboardingViewModel()
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var garden: AuthenticationManager
+    @State var isShowingAddPlantView: Bool = false
     init() {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
@@ -38,6 +39,7 @@ struct CreateGardenOnboardingView: View {
                     Button(action: {
                         Task {
                             try await garden.createGarden(gardenName:viewModel.gardenName, plants: [Datum(id: "", commonName: "", scientificName: [""], otherName: [""], cycle: "", watering: "", defaultImage: DefaultImage(imageID: 0, license: 0, licenseName: "", licenseURL: "", originalURL: "", regularURL: "", mediumURL: "", smallURL: "", thumbnail: ""))])
+                            isShowingAddPlantView = true
                         }
                     }) {
                         Text("Add Garden")
@@ -53,6 +55,9 @@ struct CreateGardenOnboardingView: View {
                 .navigationTitle("Hello, Nick!")
                 .foregroundColor(.white)
                 .padding(20)
+                .fullScreenCover(isPresented: $isShowingAddPlantView, content: {
+                    AddPlantOnboardingView()
+                                })
             }
         }
     }

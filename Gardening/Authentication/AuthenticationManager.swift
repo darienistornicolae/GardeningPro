@@ -71,7 +71,6 @@ final class AuthenticationManager: ObservableObject {
         do {
             let garden = Garden(gardenId: gardenId, gardenName: gardenName, plants: [Datum(id: "", commonName: "", scientificName: [""], otherName: [""], cycle: "", watering: "", defaultImage: DefaultImage(imageID: 0, license: 0, licenseName: "", licenseURL: "", originalURL: "", regularURL: "", mediumURL: "", smallURL: "", thumbnail: ""))])
             
-            // Encode the Garden object to a dictionary using JSONEncoder
             let jsonEncoder = JSONEncoder()
             let encodedGarden = try jsonEncoder.encode(garden)
             guard let gardenData = try JSONSerialization.jsonObject(with: encodedGarden, options: []) as? [String: Any] else {
@@ -102,8 +101,6 @@ final class AuthenticationManager: ObservableObject {
             let garden = try Firestore.Decoder().decode(Garden.self, from: data)
             self.currentGarden = garden
         } else {
-            // Handle the case when the garden document or garden data is missing.
-            // You can set self.currentGarden to nil or take other appropriate actions.
             throw NSError(domain: "DataNotFoundError", code: -1, userInfo: nil)
         }
     }
