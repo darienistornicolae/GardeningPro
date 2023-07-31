@@ -10,6 +10,7 @@ import SwiftUI
 struct AddPlantOnboardingView: View {
     
     @Environment(\.colorScheme) var colorScheme
+    @StateObject var viewModel = AddPlantOnboardingViewModel()
     @State var searchText: String = ""
     @EnvironmentObject var garden: AuthenticationManager
     init() {
@@ -40,9 +41,22 @@ struct AddPlantOnboardingView: View {
                         
                         VStack {
                             searchBar
-                            List {
-                                
+                            
+                            List(viewModel.plants, id:\.id) {plant in
+                                HStack {
+                                    if let image = viewModel.images[plant.id] {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 100, height: 100)
+                                    } else {
+                                        ProgressView()
+                                    }
+                                    
+                                    Text(plant.commonName)
+                                }
                             }
+
                             .listRowBackground(Color.black)
                             .listStyle(.plain)
                             .background(Color.gray)
@@ -69,7 +83,7 @@ struct AddPlantOnboardingView: View {
                     Spacer()
                 }
                 .navigationTitle(garden.currentGarden?.gardenName ?? "No name")
-
+                
                 .padding()
             }
         }
@@ -79,6 +93,7 @@ struct AddPlantOnboardingView: View {
 struct AddPlantOnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         AddPlantOnboardingView()
+            .environmentObject(AuthenticationManager())
     }
 }
 
@@ -86,7 +101,10 @@ fileprivate extension AddPlantOnboardingView {
     var searchBar: some View {
         HStack {
             Image(systemName: "magnifyingglass").foregroundColor(.gray)
-            TextField("Search plant...", text: $searchText)
+            TextField("Search plant...", text: $viewModel.plantName)
+                .onChange(of: viewModel.plantName) { newValue in
+                    viewModel.search(query: newValue)
+                }
         }
         .frame(maxWidth: 350)
         .padding(10)

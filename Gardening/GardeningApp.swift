@@ -7,7 +7,7 @@
 
 import SwiftUI
 //import RevenueCat
-import FirebaseCore
+import Firebase
 //import GoogleMobileAds
 
 

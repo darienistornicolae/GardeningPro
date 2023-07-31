@@ -36,6 +36,7 @@
 		01DC64352A5CAE9500553318 /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC64342A5CAE9500553318 /* APICall.swift */; };
 		01DC64372A5CB16B00553318 /* CreateGardenOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC64362A5CB16B00553318 /* CreateGardenOnboardingView.swift */; };
 		01DC64392A5CB3E700553318 /* AddPlantOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC64382A5CB3E700553318 /* AddPlantOnboardingView.swift */; };
+		01EE29302A73EFFB00E91F28 /* AddPlantOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EE292F2A73EFFB00E91F28 /* AddPlantOnboardingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		01DC64342A5CAE9500553318 /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		01DC64362A5CB16B00553318 /* CreateGardenOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGardenOnboardingView.swift; sourceTree = "<group>"; };
 		01DC64382A5CB3E700553318 /* AddPlantOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantOnboardingView.swift; sourceTree = "<group>"; };
+		01EE292F2A73EFFB00E91F28 /* AddPlantOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlantOnboardingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				014949342A5771C90063FCF8 /* LoginViewModel.swift */,
 				01DC642E2A5CABB800553318 /* SignUpViewModel.swift */,
 				0148C4672A729A9F0030A26A /* CreateGardenOnboardingViewModel.swift */,
+				01EE292F2A73EFFB00E91F28 /* AddPlantOnboardingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C68D382A576A62004F64A0 /* SignUpView.swift in Sources */,
+				01EE29302A73EFFB00E91F28 /* AddPlantOnboardingViewModel.swift in Sources */,
 				01C68D362A576A53004F64A0 /* LoginView.swift in Sources */,
 				01BE231D2A68498F00E3E906 /* AuthenticationManager.swift in Sources */,
 				01C89CEE2A702C2D00092C25 /* RootView.swift in Sources */,

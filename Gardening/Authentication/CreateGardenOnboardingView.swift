@@ -34,11 +34,12 @@ struct CreateGardenOnboardingView: View {
                         .padding(.top, 30)
                     
                     InputView(text: $viewModel.gardenName, placeholder: "Input your garden name")
+                        .foregroundColor(Color(colorScheme == .dark ? .white : .black))
                     Spacer()
                     
                     Button(action: {
                         Task {
-                            try await garden.createGarden(gardenName:viewModel.gardenName, plants: [Datum(id: "", commonName: "", scientificName: [""], otherName: [""], cycle: "", watering: "", defaultImage: DefaultImage(imageID: 0, license: 0, licenseName: "", licenseURL: "", originalURL: "", regularURL: "", mediumURL: "", smallURL: "", thumbnail: ""))])
+                            try await garden.createGarden(gardenName:viewModel.gardenName, plants: [Datum]())
                             isShowingAddPlantView = true
                         }
                     }) {
@@ -58,6 +59,7 @@ struct CreateGardenOnboardingView: View {
                 .fullScreenCover(isPresented: $isShowingAddPlantView, content: {
                     AddPlantOnboardingView()
                                 })
+                .transition(.slide)
             }
         }
     }

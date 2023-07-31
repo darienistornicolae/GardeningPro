@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import Firebase
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 protocol AuthenticationFormProtocol {
@@ -69,7 +70,7 @@ final class AuthenticationManager: ObservableObject {
         let gardenId = UUID().uuidString
         
         do {
-            let garden = Garden(gardenId: gardenId, gardenName: gardenName, plants: [Datum(id: "", commonName: "", scientificName: [""], otherName: [""], cycle: "", watering: "", defaultImage: DefaultImage(imageID: 0, license: 0, licenseName: "", licenseURL: "", originalURL: "", regularURL: "", mediumURL: "", smallURL: "", thumbnail: ""))])
+            let garden = Garden(gardenId: gardenId, gardenName: gardenName, plants: Welcome(data: [Datum](), to: 0, perPage: 0, currentPage: 0, from: 0, lastPage: 0, total: 0) )
             
             let jsonEncoder = JSONEncoder()
             let encodedGarden = try jsonEncoder.encode(garden)
