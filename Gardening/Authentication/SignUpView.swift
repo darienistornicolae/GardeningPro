@@ -14,8 +14,7 @@ struct SignUpView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var user: AuthenticationManager
-    @State private var isSignUpSuccessful = false
-
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -63,8 +62,7 @@ struct SignUpView: View {
                         Task {
                             do {
                                 try await user.createUser(email:viewModel.email, password:viewModel.password, fullName: viewModel.fullName)
-                                isSignUpSuccessful = true
-                                showCreateGardenOnboarding = true
+                                
                             } catch {
                                 print("Error creating user: \(error.localizedDescription)")
                             }
@@ -106,7 +104,7 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(viewModel: SignUpViewModel())
+        SignUpView()
     }
 }
 

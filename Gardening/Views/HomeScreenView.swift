@@ -11,6 +11,7 @@ import FirebaseAuth
 struct HomeScreenView: View {
     
     @EnvironmentObject var manager: AuthenticationManager
+
     var body: some View {
         if let user = manager.currentUser {
             List {
@@ -35,34 +36,33 @@ struct HomeScreenView: View {
                         }
                     }
                 }
+
+
                 Section("Settings") {
                     SettingsRowView(imageName: "gearshape", title: "Version", tintColor: .teal)
                 }
+
                 Section("Account") {
                     Button {
                         manager.signOut()
-                        
                     } label: {
                         SettingsRowView(imageName: "arrow.left.circle.fill", title: "Sign Out", tintColor: Color.red)
-                            
                     }
+                    
                     Button {
                         Task {
                             try await manager.resetPassword(email: manager.currentUser?.email ?? "No email")
                             print("Password Reset")
                         }
                     } label: {
-                        
                         SettingsRowView(imageName: "xmark.circle.fill", title: "Reset Password", tintColor: Color.red)
-                            
                     }
-                    
                 }
-                
             }
         }
     }
 }
+
 
 struct HomeScreenView_Previews: PreviewProvider {
     static var previews: some View {

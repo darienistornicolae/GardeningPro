@@ -13,10 +13,12 @@ struct AddPlantOnboardingView: View {
     @StateObject var viewModel = AddPlantOnboardingViewModel()
     @State var searchText: String = ""
     @EnvironmentObject var garden: AuthenticationManager
+    
     init() {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+       
     }
     
     var body: some View {
@@ -43,18 +45,26 @@ struct AddPlantOnboardingView: View {
                             searchBar
                             
                             List(viewModel.plants, id:\.id) {plant in
-                                HStack {
-                                    if let image = viewModel.images[plant.id] {
-                                        Image(uiImage: image)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 100, height: 100)
-                                    } else {
-                                        ProgressView()
+                                Button(action: {
+                                    Task {
+                                        try? await garden.addPlantToGarden(gardenId: garden.currentGarden?.gardenId ?? "", plant: plant)
+                                        
                                     }
-                                    
-                                    Text(plant.commonName)
+                                }) {
+                                    HStack {
+                                        if let image = viewModel.images[plant.id] {
+                                            Image(uiImage: image)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 100, height: 100)
+                                        } else {
+                                            ProgressView()
+                                        }
+
+                                        Text(plant.commonName)
+                                    }
                                 }
+
                             }
 
                             .listRowBackground(Color.black)

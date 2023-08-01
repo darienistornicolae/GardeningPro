@@ -12,10 +12,13 @@ struct CreateGardenOnboardingView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var garden: AuthenticationManager
     @State var isShowingAddPlantView: Bool = false
+    
+    
     init() {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+       
     }
     
     var body: some View {
@@ -41,6 +44,7 @@ struct CreateGardenOnboardingView: View {
                         Task {
                             try await garden.createGarden(gardenName:viewModel.gardenName, plants: [Datum]())
                             isShowingAddPlantView = true
+                            
                         }
                     }) {
                         Text("Add Garden")
@@ -56,9 +60,6 @@ struct CreateGardenOnboardingView: View {
                 .navigationTitle("Hello, Nick!")
                 .foregroundColor(.white)
                 .padding(20)
-                .fullScreenCover(isPresented: $isShowingAddPlantView, content: {
-                    AddPlantOnboardingView()
-                                })
                 .transition(.slide)
             }
         }

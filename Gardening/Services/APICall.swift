@@ -14,8 +14,8 @@ class Debouncer {
     
     func debounce(interval: TimeInterval, action: @escaping () async -> Void) {
         workItem?.cancel()
-        workItem = Task {
-            await Task.sleep(UInt64(interval * 1_000_000_000))  // interval in nanoseconds
+        workItem = Task.init {
+           try? await Task.sleep(nanoseconds: UInt64(interval * 1_000_000_000))  // interval in nanoseconds
             await action()
         }
     }

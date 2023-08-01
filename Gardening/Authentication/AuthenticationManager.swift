@@ -21,6 +21,8 @@ final class AuthenticationManager: ObservableObject {
     @Published var currentUser: UserModel?
     @Published var currentGarden: Garden?
     
+    private let dataBase = Firestore.firestore()
+    
     init() {
         self.userSession = Auth.auth().currentUser
         
@@ -46,11 +48,12 @@ final class AuthenticationManager: ObservableObject {
     
     func createUser(email: String, password: String, fullName: String) async throws {
         do {
+           
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
             let user = UserModel(id: result.user.uid, fullName: fullName, email: email)
             let encodedUser = try Firestore.Encoder().encode(user)
-            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
+            try await dataBase.collection("users").document(user.id).setData(encodedUser)
             try await fetchUser()
         } catch  {
            print("ERROR: User creation failed. \(error.localizedDescription)")
@@ -66,7 +69,7 @@ final class AuthenticationManager: ObservableObject {
             currentUser = nil
             return
         }
-        
+       
         let gardenId = UUID().uuidString
         
         do {
@@ -78,7 +81,7 @@ final class AuthenticationManager: ObservableObject {
                 throw NSError(domain: "SerializationError", code: -1, userInfo: nil)
             }
             
-            let userGardensRef = Firestore.firestore().collection("users").document(currentUser.id).collection("Gardens")
+            let userGardensRef = dataBase.collection("users").document(currentUser.id).collection("Gardens")
             try await userGardensRef.addDocument(data: gardenData) // Save the garden data as a document in the subcollection
             
             self.currentGarden = garden
@@ -95,7 +98,7 @@ final class AuthenticationManager: ObservableObject {
             throw NSError(domain: "AuthenticationError", code: -1, userInfo: nil)
         }
         
-        let userDocumentRef = Firestore.firestore().collection("users").document(uid)
+        let userDocumentRef = dataBase.collection("users").document(uid)
         let gardenDocumentSnapshot = try await userDocumentRef.collection("Gardens").document("gardenDocumentId").getDocument()
         
         if gardenDocumentSnapshot.exists, let data = gardenDocumentSnapshot.data() {
@@ -106,15 +109,66 @@ final class AuthenticationManager: ObservableObject {
         }
     }
 
+    func addPlantToGarden(gardenId: String, plant: Datum) async throws {
+        guard let currentUser = currentUser else { return }
+        
+        let userGardensRef = Firestore.firestore().collection("users").document(currentUser.id).collection("Gardens")
+        let gardenDocument = userGardensRef.document(gardenId)
+
+        // Define the error outside the transaction
+        var transactionError: Error?
+        
+        // Use a transaction to ensure that you read and write atomically
+        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
+            do {
+                // Get the current garden document
+                let gardenDocumentSnapshot = try transaction.getDocument(gardenDocument)
+                
+                // Decode it to a Garden if it exists, otherwise create a new one
+                var garden: Garden
+                if let existingGarden = try? gardenDocumentSnapshot.data(as: Garden.self) {
+                    garden = existingGarden
+                } else {
+                    garden = Garden(gardenId: gardenId, gardenName: "New Garden", plants: Welcome(data: [], to: 0, perPage: 0, currentPage: 0, from: 0, lastPage: 0, total: 0))
+                }
+                
+                // Add the new plant to the garden's plants
+                garden.plants.data.append(plant)
+                
+                // Update the garden document
+                try transaction.setData(from: garden, forDocument: gardenDocument)
+            } catch let error {
+                transactionError = error
+            }
+            return nil
+        }) { _, _ in
+            // Completion
+        }
+        
+        // Propagate the error
+        if let error = transactionError {
+            throw error
+        }
+
+        // Fetch the updated garden
+        try await fetchGarden()
+    }
 
     
     func fetchUser() async throws {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid else {
+            throw NSError(domain: "AuthenticationError", code: -1, userInfo: [NSLocalizedDescriptionKey: "User is not signed in"])
+        }
+        
         let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
-        guard let data = snapshot.data() else { throw URLError(.badServerResponse) }
+        guard let data = snapshot.data() else {
+            throw URLError(.badServerResponse)
+        }
+        
         let user = try Firestore.Decoder().decode(UserModel.self, from: data)
         self.currentUser = user
     }
+
     
     func deleteUser() {
         

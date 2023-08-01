@@ -9,29 +9,33 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject var authViewModel: AuthenticationManager
-    @State private var showCreateGardenOnboarding = false
+    
+    let trasition: AnyTransition = .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading))
+    
     var body: some View {
-        Group {
-            if authViewModel.userSession != nil {
-//                TabView {
-//
-//                    GardenView()
-//                        .tabItem {
-//                            Image(systemName: "camera.macro")
-//                            Text("Garden")
-//                        }
-//
-//                    HomeScreenView()
-//                        .tabItem {
-//                            Image(systemName: "person.fill")
-//                            Text("Profile")
-//                        }
-//                }
-                CreateGardenOnboardingView()
-            } else {
-                LoginView()
-            }
-        }
+                Group {
+                    if authViewModel.userSession != nil {
+                        TabView {
+        
+                            GardenView()
+                                .tabItem {
+                                    Image(systemName: "camera.macro")
+                                    Text("Garden")
+                                }
+        
+                            HomeScreenView()
+                                .tabItem {
+                                    Image(systemName: "person.fill")
+                                    Text("Profile")
+                                }
+                        }
+                        .transition(trasition)
+        
+                    } else {
+                        LoginView()
+                            .transition(trasition)
+                    }
+                }
     }
 }
 
