@@ -13,11 +13,13 @@ struct AddPlantOnboardingView: View {
     @StateObject var viewModel = AddPlantOnboardingViewModel()
     @State var searchText: String = ""
     @EnvironmentObject var garden: AuthenticationManager
-    
-    init() {
+    @AppStorage("isOnboardingCompleted") var isOnboardingCompleted: Bool = false
+    @EnvironmentObject var onboardingViewModel: OnboardingViewModel
+    init(viewModel: @autoclosure @escaping () -> AddPlantOnboardingViewModel) {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self._viewModel = StateObject(wrappedValue: viewModel())
        
     }
     
@@ -48,7 +50,8 @@ struct AddPlantOnboardingView: View {
                                 Button(action: {
                                     Task {
                                         try? await garden.addPlantToGarden(gardenId: garden.currentGarden?.gardenId ?? "", plant: plant)
-                                        
+                                        onboardingViewModel.currentPage += 1
+                                                        onboardingViewModel.isOnboardingCompleted = true
                                     }
                                 }) {
                                     HStack {
@@ -97,12 +100,14 @@ struct AddPlantOnboardingView: View {
                 .padding()
             }
         }
+        .transition(.asymmetric(insertion: .scale, removal: .opacity))
+
     }
 }
 
 struct AddPlantOnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPlantOnboardingView()
+        AddPlantOnboardingView(viewModel: AddPlantOnboardingViewModel())
             .environmentObject(AuthenticationManager())
     }
 }

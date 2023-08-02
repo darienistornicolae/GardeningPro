@@ -12,12 +12,13 @@ struct CreateGardenOnboardingView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var garden: AuthenticationManager
     @State var isShowingAddPlantView: Bool = false
+    @EnvironmentObject var onboardingViewModel: OnboardingViewModel
     
-    
-    init() {
+    init(viewModel: @autoclosure @escaping () -> CreateGardenOnboardingViewModel) {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        self._viewModel = StateObject(wrappedValue: viewModel())
        
     }
     
@@ -43,7 +44,7 @@ struct CreateGardenOnboardingView: View {
                     Button(action: {
                         Task {
                             try await garden.createGarden(gardenName:viewModel.gardenName, plants: [Datum]())
-                            isShowingAddPlantView = true
+                            onboardingViewModel.currentPage += 1
                             
                         }
                     }) {
@@ -60,7 +61,8 @@ struct CreateGardenOnboardingView: View {
                 .navigationTitle("Hello, Nick!")
                 .foregroundColor(.white)
                 .padding(20)
-                .transition(.slide)
+                .transition(.asymmetric(insertion: .scale, removal: .opacity))
+
             }
         }
     }
@@ -68,6 +70,6 @@ struct CreateGardenOnboardingView: View {
 
 struct CreateGardenOnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateGardenOnboardingView()
+        CreateGardenOnboardingView(viewModel: CreateGardenOnboardingViewModel())
     }
 }

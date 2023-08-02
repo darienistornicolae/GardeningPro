@@ -14,7 +14,13 @@ struct SignUpView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var user: AuthenticationManager
+    @AppStorage("isOnboardingCompleted") var isOnboardingCompleted: Bool = false
     
+    init(viewModel: @autoclosure @escaping () -> SignUpViewModel) {
+        
+        self._viewModel = StateObject(wrappedValue: viewModel())
+       
+    }
     var body: some View {
         NavigationView {
             ZStack {
@@ -62,7 +68,8 @@ struct SignUpView: View {
                         Task {
                             do {
                                 try await user.createUser(email:viewModel.email, password:viewModel.password, fullName: viewModel.fullName)
-                                
+                                self.isOnboardingCompleted = false
+                                dismiss()
                             } catch {
                                 print("Error creating user: \(error.localizedDescription)")
                             }
@@ -94,7 +101,8 @@ struct SignUpView: View {
                     
                 }
                 .padding()
-                .transition(.slide)
+                .transition(.asymmetric(insertion: .scale, removal: .opacity))
+
                 
             }
         }
@@ -104,7 +112,7 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(viewModel: SignUpViewModel())
     }
 }
 

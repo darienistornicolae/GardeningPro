@@ -53,7 +53,7 @@ struct LoginView: View {
                     .padding()
                     Spacer()
                     NavigationLink {
-                        SignUpView()
+                        SignUpView(viewModel: SignUpViewModel())
                             .navigationBarBackButtonHidden(true)
                     } label: {
                         HStack(spacing: 5) {
