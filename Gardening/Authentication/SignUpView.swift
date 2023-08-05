@@ -21,6 +21,7 @@ struct SignUpView: View {
         self._viewModel = StateObject(wrappedValue: viewModel())
        
     }
+    //daily commit
     var body: some View {
         NavigationView {
             ZStack {
