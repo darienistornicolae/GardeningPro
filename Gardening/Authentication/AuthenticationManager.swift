@@ -28,13 +28,13 @@ final class AuthenticationManager: ObservableObject {
         
         Task {
             do {
-                await fetchUser()
-                try await fetchGarden()
-            } catch {
-                print("ERROR: Unable to fetch user. \(error.localizedDescription)")
+                await fetchUser()   
             }
         }
     }
+
+    
+    //MARK: User
     
     func signIn(email: String, password: String) async throws {
         do {
@@ -65,6 +65,38 @@ final class AuthenticationManager: ObservableObject {
        try await Auth.auth().sendPasswordReset(withEmail: email)
     }
     
+    func fetchUser() async {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("ERROR: User is not signed in")
+            return
+        }
+        
+        do {
+            let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+            guard let data = snapshot.data() else {
+                print("ERROR: User data not found")
+                return
+            }
+            
+            let user = try Firestore.Decoder().decode(UserModel.self, from: data)
+            self.currentUser = user
+        } catch {
+            print("ERROR: Fetching user data failed - \(error)")
+        }
+    }
+
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            self.userSession = nil
+            self.currentUser = nil
+        } catch {
+            print("ERROR: The user couldn't sign out. \(error.localizedDescription)")
+        }
+    }
+    
+    //MARK: Garden
+    
     func createGarden(gardenName: String, plants: [Datum]) async throws {
         guard let currentUser = currentUser else {
             currentUser = nil
@@ -74,7 +106,7 @@ final class AuthenticationManager: ObservableObject {
         let gardenId = UUID().uuidString
         
         do {
-            let garden = Garden(gardenId: gardenId, gardenName: gardenName, plants: Welcome(data: [Datum](), to: 0, perPage: 0, currentPage: 0, from: 0, lastPage: 0, total: 0) )
+            let garden = Garden(gardenId: gardenId, gardenName: gardenName, plants: Welcome(data: plants, to: 0, perPage: 0, currentPage: 0, from: 0, lastPage: 0, total: 0))
             
             let jsonEncoder = JSONEncoder()
             let encodedGarden = try jsonEncoder.encode(garden)
@@ -83,32 +115,36 @@ final class AuthenticationManager: ObservableObject {
             }
             
             let userGardensRef = dataBase.collection("users").document(currentUser.id).collection("Gardens")
-            try await userGardensRef.addDocument(data: gardenData) // Save the garden data as a document in the subcollection
+            try await userGardensRef.document(gardenId).setData(gardenData) // Save the garden data as a document in the subcollection
             
             self.currentGarden = garden
-            try await fetchGarden()
         } catch {
             print("ERROR: Garden creation failed. \(error.localizedDescription)")
         }
     }
-
-
     
-    func fetchGarden() async throws {
+    func fetchGarden(gardenId: String) async throws -> Garden? {
         guard let uid = Auth.auth().currentUser?.uid else {
             throw NSError(domain: "AuthenticationError", code: -1, userInfo: nil)
         }
         
         let userDocumentRef = dataBase.collection("users").document(uid)
-        let gardenDocumentSnapshot = try await userDocumentRef.collection("Gardens").document("gardenDocumentId").getDocument()
+        let gardenDocumentRef = userDocumentRef.collection("Gardens").document(gardenId)
         
-        if gardenDocumentSnapshot.exists, let data = gardenDocumentSnapshot.data() {
-            let garden = try Firestore.Decoder().decode(Garden.self, from: data)
-            self.currentGarden = garden
-        } else {
-            throw NSError(domain: "DataNotFoundError", code: -1, userInfo: nil)
+        do {
+            let gardenDocumentSnapshot = try await gardenDocumentRef.getDocument()
+            
+            if gardenDocumentSnapshot.exists, let data = gardenDocumentSnapshot.data() {
+                let garden = try Firestore.Decoder().decode(Garden.self, from: data)
+                return garden
+            } else {
+                return nil // Garden not found
+            }
+        } catch {
+            throw error
         }
     }
+
 
     func addPlantToGarden(gardenId: String, plant: Datum) async throws {
         guard let currentUser = currentUser else { return }
@@ -152,43 +188,8 @@ final class AuthenticationManager: ObservableObject {
         }
 
         // Fetch the updated garden
-        try await fetchGarden()
-    }
-
-    
-    func fetchUser() async {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            print("ERROR: User is not signed in")
-            return
-        }
-        
-        do {
-            let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
-            guard let data = snapshot.data() else {
-                print("ERROR: User data not found")
-                return
-            }
-            
-            let user = try Firestore.Decoder().decode(UserModel.self, from: data)
-            self.currentUser = user
-        } catch {
-            print("ERROR: Fetching user data failed - \(error)")
-        }
-    }
-
-
-    
-    func deleteUser() {
-        
-    }
-    
-    func signOut() {
-        do {
-            try Auth.auth().signOut()
-            self.userSession = nil
-            self.currentUser = nil
-        } catch {
-            print("ERROR: The user couldn't sign out. \(error.localizedDescription)")
+        if let updatedGarden = try await fetchGarden(gardenId: gardenId) {
+            self.currentGarden = updatedGarden
         }
     }
 }

@@ -14,6 +14,7 @@ struct SignUpView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var user: AuthenticationManager
+    
     @AppStorage("isOnboardingCompleted") var isOnboardingCompleted: Bool = false
     
     init(viewModel: @autoclosure @escaping () -> SignUpViewModel) {
@@ -21,7 +22,7 @@ struct SignUpView: View {
         self._viewModel = StateObject(wrappedValue: viewModel())
        
     }
-    //daily commit
+   
     var body: some View {
         NavigationView {
             ZStack {
@@ -70,7 +71,7 @@ struct SignUpView: View {
                             do {
                                 try await user.createUser(email:viewModel.email, password:viewModel.password, fullName: viewModel.fullName)
                                 self.isOnboardingCompleted = false
-                                dismiss()
+                                //dismiss()
                             } catch {
                                 print("Error creating user: \(error.localizedDescription)")
                             }

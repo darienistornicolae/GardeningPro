@@ -11,7 +11,6 @@ struct CreateGardenOnboardingView: View {
     @StateObject var viewModel = CreateGardenOnboardingViewModel()
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var garden: AuthenticationManager
-    @State var isShowingAddPlantView: Bool = false
     @EnvironmentObject var onboardingViewModel: OnboardingViewModel
     
     init(viewModel: @autoclosure @escaping () -> CreateGardenOnboardingViewModel) {

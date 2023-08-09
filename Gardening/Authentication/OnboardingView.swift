@@ -24,6 +24,7 @@ struct OnboardingView: View {
                 AddPlantOnboardingView(viewModel: AddPlantOnboardingViewModel())
                     .environmentObject(viewModel)
             }
+            
         }
         .animation(.easeIn, value: viewModel.currentPage)
     }
