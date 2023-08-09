@@ -19,7 +19,7 @@ struct RootView: View {
             if authViewModel.userSession != nil {
                 if !isOnboardingCompleted {
                     OnboardingView()
-                        .transition(.asymmetric(insertion: .scale, removal: .opacity))
+                        .transition(trasition)
 
                 }  else {
                     TabView {
@@ -35,12 +35,12 @@ struct RootView: View {
                                 Text("Profile")
                             }
                     }
-                    .transition(.asymmetric(insertion: .scale, removal: .opacity))
+                    .transition(trasition)
 
                 }
             } else {
                 LoginView()
-                    .transition(.asymmetric(insertion: .scale, removal: .opacity))
+                    .transition(trasition)
 
             }
         }

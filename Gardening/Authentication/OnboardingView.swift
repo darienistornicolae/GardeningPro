@@ -25,7 +25,7 @@ struct OnboardingView: View {
                     .environmentObject(viewModel)
             }
         }
-        .animation(.default)
+        .animation(.easeIn, value: viewModel.currentPage)
     }
 }
 

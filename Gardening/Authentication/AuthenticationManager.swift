@@ -28,7 +28,7 @@ final class AuthenticationManager: ObservableObject {
         
         Task {
             do {
-                try await fetchUser()
+                await fetchUser()
                 try await fetchGarden()
             } catch {
                 print("ERROR: Unable to fetch user. \(error.localizedDescription)")
@@ -40,7 +40,8 @@ final class AuthenticationManager: ObservableObject {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
-            try await fetchUser()
+            
+            await fetchUser()
         } catch {
             print("Failed to Log in: \(error.localizedDescription)")
         }
@@ -54,7 +55,7 @@ final class AuthenticationManager: ObservableObject {
             let user = UserModel(id: result.user.uid, fullName: fullName, email: email)
             let encodedUser = try Firestore.Encoder().encode(user)
             try await dataBase.collection("users").document(user.id).setData(encodedUser)
-            try await fetchUser()
+            await fetchUser()
         } catch  {
            print("ERROR: User creation failed. \(error.localizedDescription)")
         }
@@ -155,19 +156,26 @@ final class AuthenticationManager: ObservableObject {
     }
 
     
-    func fetchUser() async throws {
+    func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else {
-            throw NSError(domain: "AuthenticationError", code: -1, userInfo: [NSLocalizedDescriptionKey: "User is not signed in"])
+            print("ERROR: User is not signed in")
+            return
         }
         
-        let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
-        guard let data = snapshot.data() else {
-            throw URLError(.badServerResponse)
+        do {
+            let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+            guard let data = snapshot.data() else {
+                print("ERROR: User data not found")
+                return
+            }
+            
+            let user = try Firestore.Decoder().decode(UserModel.self, from: data)
+            self.currentUser = user
+        } catch {
+            print("ERROR: Fetching user data failed - \(error)")
         }
-        
-        let user = try Firestore.Decoder().decode(UserModel.self, from: data)
-        self.currentUser = user
     }
+
 
     
     func deleteUser() {

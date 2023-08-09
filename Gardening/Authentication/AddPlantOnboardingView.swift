@@ -15,6 +15,7 @@ struct AddPlantOnboardingView: View {
     @EnvironmentObject var garden: AuthenticationManager
     @AppStorage("isOnboardingCompleted") var isOnboardingCompleted: Bool = false
     @EnvironmentObject var onboardingViewModel: OnboardingViewModel
+    
     init(viewModel: @autoclosure @escaping () -> AddPlantOnboardingViewModel) {
         let navBarAppearance = UINavigationBar.appearance()
         navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
@@ -50,8 +51,7 @@ struct AddPlantOnboardingView: View {
                                 Button(action: {
                                     Task {
                                         try? await garden.addPlantToGarden(gardenId: garden.currentGarden?.gardenId ?? "", plant: plant)
-                                        onboardingViewModel.currentPage += 1
-                                                        onboardingViewModel.isOnboardingCompleted = true
+                                        
                                     }
                                 }) {
                                     HStack {
@@ -78,6 +78,8 @@ struct AddPlantOnboardingView: View {
                             
                             Spacer()
                             Button(action: {
+                                onboardingViewModel.currentPage += 1
+                                onboardingViewModel.isOnboardingCompleted = true
                             }) {
                                 Text("Continue")
                                     .foregroundColor(.white)
@@ -100,7 +102,7 @@ struct AddPlantOnboardingView: View {
                 .padding()
             }
         }
-        .transition(.asymmetric(insertion: .scale, removal: .opacity))
+        
 
     }
 }
