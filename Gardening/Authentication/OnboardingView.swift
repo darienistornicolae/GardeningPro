@@ -26,7 +26,7 @@ struct OnboardingView: View {
             }
             
         }
-        .animation(.easeIn, value: viewModel.currentPage)
+        .animation(.linear, value: viewModel.currentPage)
     }
 }
 

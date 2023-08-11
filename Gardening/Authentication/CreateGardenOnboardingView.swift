@@ -57,10 +57,10 @@ struct CreateGardenOnboardingView: View {
                     }
                     
                 }
-                .navigationTitle("Hello, Nick!")
+                .navigationTitle("Hello gardner!")
                 .foregroundColor(.white)
                 .padding(20)
-                .transition(.asymmetric(insertion: .scale, removal: .opacity))
+                
 
             }
         }

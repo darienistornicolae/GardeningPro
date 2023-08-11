@@ -18,9 +18,11 @@ struct RootView: View {
         Group {
             if authViewModel.userSession != nil {
                 if !isOnboardingCompleted {
+                    
                     OnboardingView()
                         .transition(trasition)
-
+                    
+                    
                 }  else {
                     TabView {
                         GardenView()
@@ -28,7 +30,7 @@ struct RootView: View {
                                 Image(systemName: "camera.macro")
                                 Text("Garden")
                             }
-        
+                        
                         HomeScreenView()
                             .tabItem {
                                 Image(systemName: "person.fill")
@@ -36,12 +38,11 @@ struct RootView: View {
                             }
                     }
                     .transition(trasition)
-
+                    
                 }
             } else {
                 LoginView()
-                    .transition(trasition)
-
+                
             }
         }
     }

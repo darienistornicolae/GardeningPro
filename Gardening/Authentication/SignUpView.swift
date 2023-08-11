@@ -103,9 +103,6 @@ struct SignUpView: View {
                     
                 }
                 .padding()
-                .transition(.asymmetric(insertion: .scale, removal: .opacity))
-
-                
             }
         }
         

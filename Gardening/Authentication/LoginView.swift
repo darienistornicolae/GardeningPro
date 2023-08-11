@@ -12,6 +12,7 @@ struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
     @EnvironmentObject private var manager: AuthenticationManager
     @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -62,6 +63,7 @@ struct LoginView: View {
                             Text("Sign Up!")
                                 .fontWeight(.bold)
                         }
+                        .padding()
                     }
                 }
             }
