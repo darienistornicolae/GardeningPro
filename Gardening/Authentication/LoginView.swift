@@ -50,7 +50,7 @@ struct LoginView: View {
                             .disabled(!formIsValid)
                             .opacity(formIsValid ? 1.0 : 0.5)
                     }
-                    //daily commit
+                    
                     .padding()
                     Spacer()
                     NavigationLink {
