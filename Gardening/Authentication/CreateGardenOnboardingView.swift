@@ -20,7 +20,7 @@ struct CreateGardenOnboardingView: View {
         self._viewModel = StateObject(wrappedValue: viewModel())
        
     }
-
+// daily
     var body: some View {
         NavigationView {
             ZStack {
