@@ -33,7 +33,7 @@ final class AuthenticationManager: ObservableObject {
         }
     }
 
-    
+    //daily commit
     //MARK: User
     
     func signIn(email: String, password: String) async throws {
