@@ -33,7 +33,7 @@ final class AuthenticationManager: ObservableObject {
         }
     }
 
-    
+    //publiv
     //MARK: User
     
     func signIn(email: String, password: String) async throws {
