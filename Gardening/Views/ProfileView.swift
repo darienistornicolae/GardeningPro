@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 
-struct HomeScreenView: View {
+struct ProfileView: View {
     
     @EnvironmentObject var manager: AuthenticationManager
 
@@ -66,7 +66,7 @@ struct HomeScreenView: View {
 
 struct HomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreenView()
+        ProfileView()
             .environmentObject(AuthenticationManager())
     }
 }

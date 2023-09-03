@@ -7,11 +7,18 @@
 
 import SwiftUI
 import Firebase
+
 struct GardenView: View {
     @EnvironmentObject var manager: AuthenticationManager
     var body: some View {
-        
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack {
+                if let garden = manager.currentGarden {
+                    Text(garden.gardenName)
+                }
+            }
+            .navigationTitle("My gardens")
+        }
     }
 }
 

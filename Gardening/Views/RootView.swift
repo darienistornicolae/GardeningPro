@@ -31,7 +31,7 @@ struct RootView: View {
                                 Text("Garden")
                             }
                         
-                        HomeScreenView()
+                        ProfileView()
                             .tabItem {
                                 Image(systemName: "person.fill")
                                 Text("Profile")
