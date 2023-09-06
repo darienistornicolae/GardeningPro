@@ -10,12 +10,16 @@ import Firebase
 
 struct GardenView: View {
     @EnvironmentObject var manager: AuthenticationManager
+    @StateObject var viewModel = AddPlantOnboardingViewModel()
     var body: some View {
         NavigationView {
             VStack {
-                if let garden = manager.currentGarden {
-                    Text(garden.gardenName)
+                List(viewModel.plants, id:\.id) { plant in
+                    Text(plant.commonName)
+                        .foregroundColor(.red)
+
                 }
+                .cornerRadius(10)
             }
             .navigationTitle("My gardens")
         }

@@ -12,6 +12,8 @@ struct AddPlantOnboardingView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var viewModel = AddPlantOnboardingViewModel()
     @State var searchText: String = ""
+    @State private var showAlert = false
+    @State private var addedPlantName: String?
     @EnvironmentObject var garden: AuthenticationManager
     @AppStorage("isOnboardingCompleted") var isOnboardingCompleted: Bool = false
     @EnvironmentObject var onboardingViewModel: OnboardingViewModel
@@ -51,7 +53,8 @@ struct AddPlantOnboardingView: View {
                                 Button(action: {
                                     Task {
                                         try? await garden.addPlantToGarden(gardenId: garden.currentGarden?.gardenId ?? "", plant: plant)
-                                        
+                                        showAlert = true
+                                        addedPlantName = plant.commonName
                                     }
                                 }) {
                                     HStack {
@@ -69,7 +72,13 @@ struct AddPlantOnboardingView: View {
                                 }
 
                             }
-
+                            .alert(isPresented: $showAlert) {
+                                Alert(
+                                    title: Text("Plant Added"),
+                                    message: addedPlantName.map { Text(" \($0) has been successfully added to your garden.") } ?? Text("Plant added successfully."),
+                                    dismissButton: .default(Text("OK"))
+                                )
+                            }
                             .listRowBackground(Color.black)
                             .listStyle(.plain)
                             .background(Color.gray)
@@ -102,8 +111,6 @@ struct AddPlantOnboardingView: View {
                 .padding()
             }
         }
-        
-
     }
 }
 
@@ -118,8 +125,8 @@ fileprivate extension AddPlantOnboardingView {
     var searchBar: some View {
         HStack {
             Image(systemName: "magnifyingglass").foregroundColor(.gray)
-            TextField("Search plant...", text: $viewModel.plantName)
-                .onChange(of: viewModel.plantName) { newValue in
+            TextField("Search plant...", text: $viewModel.searchPlantName)
+                .onChange(of: viewModel.searchPlantName) { newValue in
                     viewModel.search(query: newValue)
                 }
         }

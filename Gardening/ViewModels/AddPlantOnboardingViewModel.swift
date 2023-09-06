@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class AddPlantOnboardingViewModel: ObservableObject {
-    @Published var plantName: String = ""
+    @Published var searchPlantName: String = ""
     @Published var plants: [Datum] = []
     @Published var images: [Int: UIImage] = [:]
     
