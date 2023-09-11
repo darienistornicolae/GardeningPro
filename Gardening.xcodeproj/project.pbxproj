@@ -20,6 +20,7 @@
 		0149492E2A576F520063FCF8 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0149492D2A576F520063FCF8 /* StoreKit.framework */; };
 		014949312A576FA00063FCF8 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 014949302A576FA00063FCF8 /* GoogleMobileAds */; };
 		014949352A5771C90063FCF8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014949342A5771C90063FCF8 /* LoginViewModel.swift */; };
+		0182DFF92AAF3CCF0019B2A9 /* GardenViewMidek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182DFF82AAF3CCF0019B2A9 /* GardenViewMidek.swift */; };
 		01BE231B2A68477300E3E906 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01BE231A2A68477300E3E906 /* GoogleService-Info.plist */; };
 		01BE231D2A68498F00E3E906 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BE231C2A68498F00E3E906 /* AuthenticationManager.swift */; };
 		01C68D282A576A2C004F64A0 /* GardeningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C68D272A576A2C004F64A0 /* GardeningApp.swift */; };
@@ -46,6 +47,7 @@
 		0148C4672A729A9F0030A26A /* CreateGardenOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGardenOnboardingViewModel.swift; sourceTree = "<group>"; };
 		0149492D2A576F520063FCF8 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		014949342A5771C90063FCF8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0182DFF82AAF3CCF0019B2A9 /* GardenViewMidek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GardenViewMidek.swift; sourceTree = "<group>"; };
 		01BE231A2A68477300E3E906 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		01BE231C2A68498F00E3E906 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		01C68D242A576A2C004F64A0 /* Gardening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gardening.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 				01DC642E2A5CABB800553318 /* SignUpViewModel.swift */,
 				0148C4672A729A9F0030A26A /* CreateGardenOnboardingViewModel.swift */,
 				01EE292F2A73EFFB00E91F28 /* AddPlantOnboardingViewModel.swift */,
+				0182DFF82AAF3CCF0019B2A9 /* GardenViewMidek.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				01101AB72A7A50FF001B8669 /* OnboardingView.swift in Sources */,
 				014949352A5771C90063FCF8 /* LoginViewModel.swift in Sources */,
 				01DC642F2A5CABB800553318 /* SignUpViewModel.swift in Sources */,
+				0182DFF92AAF3CCF0019B2A9 /* GardenViewMidek.swift in Sources */,
 				01DC64392A5CB3E700553318 /* AddPlantOnboardingView.swift in Sources */,
 				01C89CE82A7011B000092C25 /* InputView.swift in Sources */,
 				013C24332A708D780027325C /* GardenView.swift in Sources */,

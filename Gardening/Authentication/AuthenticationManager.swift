@@ -146,49 +146,32 @@ final class AuthenticationManager: ObservableObject {
 
 
     func addPlantToGarden(gardenId: String, plant: Datum) async throws {
-        guard let currentUser = currentUser else { return }
-        
+        guard let currentUser = currentUser else {
+            return
+        }
+
         let userGardensRef = Firestore.firestore().collection("users").document(currentUser.id).collection("Gardens")
         let gardenDocument = userGardensRef.document(gardenId)
 
-        // Define the error outside the transaction
-        var transactionError: Error?
-        
-        // Use a transaction to ensure that you read and write atomically
-        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
-            do {
-                // Get the current garden document
-                let gardenDocumentSnapshot = try transaction.getDocument(gardenDocument)
-                
-                // Decode it to a Garden if it exists, otherwise create a new one
-                var garden: Garden
-                if let existingGarden = try? gardenDocumentSnapshot.data(as: Garden.self) {
-                    garden = existingGarden
-                } else {
-                    garden = Garden(gardenId: gardenId, gardenName: "New Garden", plants: Welcome(data: [], to: 0, perPage: 0, currentPage: 0, from: 0, lastPage: 0, total: 0))
-                }
-                
-                // Add the new plant to the garden's plants
-                garden.plants.data.append(plant)
-                
-                // Update the garden document
-                try transaction.setData(from: garden, forDocument: gardenDocument)
-            } catch let error {
-                transactionError = error
-            }
-            return nil
-        }) { _, _ in
-            // Completion
-        }
-        
-        // Propagate the error
-        if let error = transactionError {
-            throw error
+        // Fetch the current garden document
+        let gardenDocumentSnapshot = try await gardenDocument.getDocument()
+
+        // Decode it to a Garden if it exists, otherwise create a new one
+        var garden: Garden
+        if let existingGarden = try? gardenDocumentSnapshot.data(as: Garden.self) {
+            garden = existingGarden
+        } else {
+            garden = Garden(gardenId: gardenId, gardenName: "New Garden", plants: Welcome(data: [], to: 0, perPage: 0, currentPage: 0, from: 0, lastPage: 0, total: 0))
         }
 
+        // Add the new plant to the garden's plants
+        garden.plants.data.append(plant)
+
+        // Update the garden document with the new data
+        try gardenDocument.setData(from: garden)
+
         // Fetch the updated garden
-        if let updatedGarden = try await fetchGarden(gardenId: gardenId) {
-            self.currentGarden = updatedGarden
-        }
+        self.currentGarden = garden
     }
+
 }

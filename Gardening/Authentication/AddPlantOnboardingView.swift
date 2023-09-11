@@ -70,7 +70,7 @@ struct AddPlantOnboardingView: View {
                                         Text(plant.commonName)
                                     }
                                 }
-///
+
                             }
                             .alert(isPresented: $showAlert) {
                                 Alert(
