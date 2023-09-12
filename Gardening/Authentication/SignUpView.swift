@@ -76,6 +76,7 @@ struct SignUpView: View {
                                 print("Error creating user: \(error.localizedDescription)")
                             }
                         }
+                        //
                     } label: {
                         Text("Sign In")
                             .foregroundColor(.white)
