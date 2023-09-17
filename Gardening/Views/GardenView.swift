@@ -17,7 +17,7 @@ struct GardenView: View {
                 List(viewModel.plants, id:\.id) { plant in
                     Text(plant.commonName)
                         .foregroundColor(.red)
-//
+
                 }
                 .cornerRadius(10)
             }
