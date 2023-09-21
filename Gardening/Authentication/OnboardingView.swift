@@ -15,7 +15,8 @@ class OnboardingViewModel: ObservableObject {
 struct OnboardingView: View {
     @StateObject var viewModel = OnboardingViewModel()
     @State private var onboardingStatus: [String: Bool] = [:] // Dictionary to track onboarding status
-
+    let transition: AnyTransition = .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading))
+    
     var body: some View {
         VStack {
             if viewModel.isOnboardingCompleted {
@@ -33,7 +34,7 @@ struct OnboardingView: View {
                             Text("Profile")
                         }
                 }
-                
+                .transition(transition)
             } else {
                 // Continue showing the onboarding content
                 if viewModel.currentPage == 0 {
@@ -58,6 +59,7 @@ struct OnboardingView: View {
         .animation(.linear, value: viewModel.currentPage)
     }
 }
+
 
 
 

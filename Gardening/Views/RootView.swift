@@ -20,7 +20,7 @@ struct RootView: View {
                 if let currentUser = authViewModel.userSession?.uid {
                     let userId = currentUser
                     let isOnboardingCompleted = onboardingStatus[userId] ?? false // Use the dictionary
-                    if !isOnboardingCompleted {
+                    if !isOnboardingCompleted && authViewModel.userSession != nil{
                         OnboardingView()
                             .transition(trasition)
                     } else {
